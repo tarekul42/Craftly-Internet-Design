@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { FeedPost } from '@/types';
-import { Pacifico, JetBrains_Mono, Inter } from 'next/font/google';
+import { JetBrains_Mono, Inter } from 'next/font/google';
 import Image from 'next/image';
 import LogicMap from '@/components/LogicMap';
 import { useToast } from '@/components/Toast';
 import { useAuth } from '@/components/Auth';
 import { useData } from '@/components/DataContext';
 
-const pacifico = Pacifico({ weight: '400', subsets: ['latin'] });
 const mono = JetBrains_Mono({ subsets: ['latin'] });
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!selectedPost && feedData.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPost(feedData[0]);
     }
   }, [feedData, selectedPost]);
@@ -69,7 +69,7 @@ export default function Home() {
           <div className="flex justify-between items-end">
             <div>
               <h2 className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 dark:text-white/40 mb-1`}>
-                The Orchestrator's Console
+                The Orchestrator&apos;s Console
               </h2>
               <div className="flex gap-4 items-center">
                 <button 
@@ -124,7 +124,7 @@ export default function Home() {
                     <div>
                       <div className="font-bold text-sm leading-none">{post.creator}</div>
                       <div className={`${mono.className} text-[9px] opacity-50 mt-1 uppercase`}>
-                        {post.type} // {post.id.padStart(3, '0')}
+                        {post.type} {'//'} {post.id.padStart(3, '0')}
                       </div>
                     </div>
                   </div>
@@ -247,7 +247,7 @@ export default function Home() {
                </div>
 
                <p className="text-xl md:text-2xl font-serif text-black/90 dark:text-white/90 leading-relaxed mb-8 md:mb-12 border-l-4 border-black dark:border-white pl-6 md:pl-8 py-2 italic">
-                 "{selectedPost.content}"
+                 &quot;{selectedPost.content}&quot;
                </p>
 
                {selectedPost.attachment && (

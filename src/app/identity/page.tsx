@@ -24,7 +24,7 @@ export default function IdentityPage() {
             Access Denied
           </h1>
           <p className="text-white/60 mb-8 font-serif italic text-lg border-l-2 border-red-500/50 pl-4">
-            "The identity matrix is locked. You must initialize your digital presence to view this sector."
+            &quot;The identity matrix is locked. You must initialize your digital presence to view this sector.&quot;
           </p>
           <button 
             onClick={login}

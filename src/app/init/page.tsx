@@ -33,7 +33,7 @@ export default function InitNodePage() {
             Access Denied
           </h1>
           <p className="text-white/60 mb-8 font-serif italic text-lg border-l-2 border-red-500/50 pl-4">
-            "The initialization sector is locked. You must establish your digital identity to broadcast logic to the network."
+            &quot;The initialization sector is locked. You must establish your digital identity to broadcast logic to the network.&quot;
           </p>
           <button 
             onClick={login}
@@ -70,7 +70,7 @@ export default function InitNodePage() {
           type: 'experience',
           content: content.trim(),
           tags: tagsArray.length > 0 ? tagsArray : ['log']
-        } as any); // Using 'any' briefly to bypass complex union type, though ExperiencePost is preferred. Actually let's just make it properly.
+        });
       } else {
         broadcastPost({
           ...basePost,
@@ -89,7 +89,7 @@ export default function InitNodePage() {
               { id: '1', label: 'Init', detail: 'Node initialized via Console' }
             ]
           }
-        } as any);
+        });
       }
 
       setIsBroadcasting(false);

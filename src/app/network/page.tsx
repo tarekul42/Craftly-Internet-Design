@@ -1,13 +1,12 @@
 'use client';
 
-import { JetBrains_Mono, Inter, Pacifico } from 'next/font/google';
+import { JetBrains_Mono, Inter } from 'next/font/google';
 import { orchestrators } from '@/data/mockData';
 import { Orchestrator } from '@/types';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 const mono = JetBrains_Mono({ subsets: ['latin'] });
 const inter = Inter({ subsets: ['latin'] });
-const pacifico = Pacifico({ weight: '400', subsets: ['latin'] });
 
 import { useToast } from '@/components/Toast';
 import { useAuth } from '@/components/Auth';

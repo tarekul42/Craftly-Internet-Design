@@ -15,6 +15,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const savedTheme = localStorage.getItem('craftly-theme');
     if (savedTheme === 'dark') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
       document.documentElement.classList.add('dark');
     }

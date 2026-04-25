@@ -12,12 +12,11 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isRegistered, setIsRegistered] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const stored = localStorage.getItem('craftly_auth');
     if (stored === 'true') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsRegistered(true);
     }
   }, []);

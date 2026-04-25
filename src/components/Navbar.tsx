@@ -16,7 +16,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBroadcastOpen, setIsBroadcastOpen] = useState(false);
   const pathname = usePathname();
-  const { isRegistered, login, logout } = useAuth();
+  const { isRegistered, login } = useAuth();
   const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {

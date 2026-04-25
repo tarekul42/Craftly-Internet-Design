@@ -1,7 +1,6 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { feedData as initialFeedData, workbenchData as initialWorkbenchData } from '@/data/mockData';
 import { api } from '@/services/api';
 import { FeedPost, WorkbenchItem } from '@/types';
 

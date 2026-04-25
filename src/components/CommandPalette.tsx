@@ -15,7 +15,7 @@ export function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { toast } = useToast();
-  const { isRegistered, login, logout } = useAuth();
+  const { isRegistered, login } = useAuth();
   const { toggleTheme, isDark } = useTheme();
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export function CommandPalette() {
             </div>
           )}
           {filteredCommands.length > 0 ? (
-            filteredCommands.map((cmd, index) => (
+            filteredCommands.map((cmd) => (
               <button
                 key={cmd.id}
                 onClick={() => handleSelect(cmd.action)}
