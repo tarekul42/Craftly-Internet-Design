@@ -134,6 +134,7 @@ export const feedData: FeedPost[] = [
     creator: "Sarah Chen",
     signature: "S.Chen",
     timestamp: "2024-04-24T13:15:00Z",
+    isLead: true,
     name: "Grid Ghost",
     tagline: "The invisible architecture of asymmetrical chaos.",
     description: "An experimental layout engine that uses Poisson-disk sampling to distribute UI elements in a way that feels organic yet mathematically balanced.",
@@ -236,6 +237,7 @@ export const feedData: FeedPost[] = [
     creator: "Sarah Chen",
     signature: "S.Chen",
     timestamp: "2024-04-24T19:30:00Z",
+    isLead: true,
     name: "Latency Layer",
     tagline: "Visualizing the 'Thought Process' of AI.",
     description: "A UI wrapper for streaming LLM outputs that turns latency into an aesthetic feature through typographic pulsing and 'thinking' skeletons.",
@@ -338,6 +340,7 @@ export const feedData: FeedPost[] = [
     creator: "Sarah Chen",
     signature: "S.Chen",
     timestamp: "2024-04-25T03:00:00Z",
+    isLead: true,
     name: "Echo Chamber",
     tagline: "Simulating the long-term impact of AI bias.",
     description: "A visualization tool that runs 10,000 iterations of an AI model's output to show how small initial biases manifest into systemic failures.",
@@ -457,6 +460,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "S.Chen",
     specialty: "Edge-Compute & Build-Time Inference",
     status: "active",
+    role: "lead",
     metrics: { nodesBroadcasted: 56, forkRate: 2100 }
   },
   {

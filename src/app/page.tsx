@@ -122,7 +122,12 @@ export default function Home() {
                       {post.creator.charAt(0)}
                     </div>
                     <div>
-                      <div className="font-bold text-sm leading-none">{post.creator}</div>
+                      <div className="flex items-center gap-2">
+                        <div className="font-bold text-sm leading-none">{post.creator}</div>
+                        {post.isLead && (
+                          <span className={`${mono.className} text-[7px] bg-black text-white dark:bg-white dark:text-black px-1 py-0.5 rounded-sm font-black`}>LEAD</span>
+                        )}
+                      </div>
                       <div className={`${mono.className} text-[9px] opacity-50 mt-1 uppercase`}>
                         {post.type} {'//'} {post.id.padStart(3, '0')}
                       </div>
@@ -239,7 +244,12 @@ export default function Home() {
                    {selectedPost.creator.charAt(0)}
                  </div>
                  <div>
-                   <div className="text-lg md:text-xl font-bold font-sans">{selectedPost.creator}</div>
+                    <div className="flex items-center gap-3">
+                      <div className="text-lg md:text-xl font-bold font-sans">{selectedPost.creator}</div>
+                      {selectedPost.isLead && (
+                        <span className={`${mono.className} text-[9px] bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 rounded-sm font-black`}>LEAD ORCHESTRATOR</span>
+                      )}
+                    </div>
                    <div className={`${mono.className} text-[10px] md:text-xs opacity-50 uppercase tracking-widest mt-1`}>
                      {selectedPost.signature}
                    </div>
@@ -281,9 +291,14 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 right-0 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-t border-black dark:border-white p-4 md:p-8">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-2 md:gap-0">
                     <div>
-                      <h1 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase leading-none mb-1 md:mb-2">
-                        {selectedPost.name}
-                      </h1>
+                      <div className="flex items-center gap-3 mb-1 md:mb-2">
+                        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase leading-none">
+                          {selectedPost.name}
+                        </h1>
+                        {selectedPost.isLead && (
+                          <span className={`${mono.className} text-[10px] bg-black text-white dark:bg-white dark:text-black px-3 py-1 rounded-sm font-black`}>LEAD</span>
+                        )}
+                      </div>
                       <p className={`${mono.className} text-[10px] md:text-xs uppercase tracking-widest opacity-60`}>
                         By {selectedPost.creator}
                       </p>
@@ -298,7 +313,7 @@ export default function Home() {
               {/* Info & Logic */}
               <div className="flex-1 flex flex-col md:flex-row md:divide-x divide-y md:divide-y-0 divide-black dark:divide-white min-h-[500px]">
                 {/* Case Study Column */}
-                <div className="w-full md:w-1/2 p-6 md:p-12 bg-white dark:bg-black">
+                <div className="w-full md:w-1/2 p-6 md:p-12 pb-24 md:pb-32 bg-white dark:bg-black">
                   <h4 className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.3em] mb-8 md:mb-12 text-black/40 dark:text-white/40 border-b border-black dark:border-white pb-2 md:pb-4`}>
                     01 // Architectural Case Study
                   </h4>
@@ -324,7 +339,7 @@ export default function Home() {
                 </div>
 
                 {/* Visual Breakdown Column */}
-                <div className="w-full md:w-1/2 p-6 md:p-12 bg-gray-50 dark:bg-[#111] relative overflow-hidden min-h-[400px]">
+                <div className="w-full md:w-1/2 p-6 md:p-12 pb-24 md:pb-32 bg-gray-50 dark:bg-[#111] relative overflow-hidden min-h-[400px]">
                   <h4 className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.3em] mb-6 md:mb-12 text-black/40 dark:text-white/40 border-b border-black dark:border-white pb-2 md:pb-4 relative z-10 bg-gray-50 dark:bg-[#111]`}>
                     02 // Logic Extraction
                   </h4>

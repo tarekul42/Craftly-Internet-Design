@@ -22,6 +22,7 @@ export interface BasePost {
   creator: string;
   signature: string;
   timestamp: string;
+  isLead?: boolean;
   replies?: Reply[];
   metrics: {
     acknowledgements: number;
@@ -61,6 +62,7 @@ export interface Orchestrator {
   signature: string;
   specialty: string;
   status: 'active' | 'dormant';
+  role?: 'lead' | 'member';
   metrics: {
     nodesBroadcasted: number;
     forkRate: number;

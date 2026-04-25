@@ -21,6 +21,12 @@ In a regular social media app, you "like" a post. In Craftly, you **Fork** a nod
 - When you fork a project, it gets saved to your **Workbench**. 
 - This represents "pulling" that logic into your own private knowledge base for later review or integration into your own projects.
 
+### 4. Technical Engagement (The Peer Review Model)
+Unlike traditional social apps, engagement here is a form of **Peer Review**:
+- **Acks (Acknowledgements)**: A digital "Copy that." It signals comprehension of the logic.
+- **Audits**: A high-level validation that the architectural map is sound.
+- **Signal**: The more a node is audited and forked, the higher its "Signal" becomes, surfacing it to the top of the network for other engineers.
+
 ---
 
 ## 🛠️ Tech Stack
@@ -39,10 +45,13 @@ You might ask: *Why is everything black and white? Why use mono fonts? Why not j
 ### 1. Signal Over Noise
 Regular social media is designed for **engagement** (dopamine hits, colorful distractions, infinite scrolling). Craftly Internet is designed for **orchestration**. By stripping away color and using a rigid grid, your brain focuses entirely on the **architecture** and **logic** of the code being shared.
 
-### 2. High-Information Density
+### 2. Professional Accountability
+By replacing "Likes" with "Audits" and "Acks," we remove the performative aspect of social media. Engaging with a post means you are professionally acknowledging its technical validity.
+
+### 3. High-Information Density
 Mono fonts and terminal-style layouts allow us to pack more technical data into a smaller space without it feeling cluttered. It speaks the language of the tools we use every day (VS Code, Terminal, Documentation).
 
-### 3. Utility-First Interaction
+### 4. Utility-First Interaction
 "Liking" something is passive. "Forking" something is an action. By using terminology borrowed from version control (Fork, Broadcast, Initialize, Terminate), we turn "browsing" into a simulated **engineering workflow**.
 
 ---
