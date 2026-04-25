@@ -291,20 +291,6 @@ These are three completely different information needs. Serving them from the sa
 
 The role system is not a label-swap — it's a complete content transformation. When you switch from Engineer to Guest, the feed articles are rewritten, the network profiles are re-described, the workbench notes change tone, and even the error messages adapt. The platform reshapes itself around you.
 
-### Why Monochrome?
-
-Color is information. When every button, status, and notification has a different color, your brain spends energy decoding the palette instead of understanding the content. Red means error. Green means success. Blue means link. You're constantly translating.
-
-By removing color entirely, Craftly eliminates that translation layer. Your brain goes straight to the content — the words, the layout, the structure. The information hierarchy is communicated through size, weight, spacing, and position, not through a color wheel. This is how architecture blueprints work, how academic papers work, how high-end editorial design works. The content carries all the weight.
-
-There's also a consistency argument. Social media platforms look different in dark mode, different on different devices, different depending on which designer last updated the style guide. A monochrome system with two states (black-on-white and white-on-black) is inherently consistent. It scales without fragmentation.
-
-### Why Pacifico Only for the Logo?
-
-Pacifico is a personality font. It has character, warmth, and presence. In a design system that's otherwise rigid — monospace labels, uppercase tracking, strict grids — the Pacifico logo is the one moment of humanity. It says "real people made this."
-
-Used everywhere, it becomes noise. Used in exactly one place — the logo — it becomes an anchor. The moment you see that handwritten script, you know where you are. It's the visual signature of the brand, and signatures only work when they're rare.
-
 ### Why a Split-Pane Layout Instead of a Feed?
 
 A traditional feed scrolls vertically. Each item gets the same width, the same card treatment, the same interaction bar. You consume items one at a time, in sequence, like reading a newspaper.
