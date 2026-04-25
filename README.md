@@ -379,4 +379,15 @@ src/
 
 ---
 
+## Community
+
+We welcome contributions and feedback from the community. Please see our guidelines:
+
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)**: How to get involved and technical standards.
+- **[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)**: Community expectations and pledge.
+- **[SECURITY.md](./SECURITY.md)**: Vulnerability reporting and practices.
+- **[LICENSE](./LICENSE)**: MIT License details.
+
+---
+
 **Craftly Internet** — *The same platform, experienced differently.*

@@ -1,15 +1,14 @@
-name: CI
+name: "CI"
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-permissions:
-  contents: read
 
 jobs:
   build:
+    name: Lint & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -17,15 +16,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - name: Install dependencies
         run: bun install
 
-      - name: Run linter
+      - name: Run Lint
         run: bun run lint
 
-      - name: Build project
+      - name: Run Build
         run: bun run build
