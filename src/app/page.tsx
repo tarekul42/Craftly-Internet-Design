@@ -229,7 +229,7 @@ export default function Home() {
 
         <div className="flex-1 overflow-y-auto custom-scrollbar relative">
           {selectedPost.type === 'experience' ? (
-            <div className="max-w-3xl mx-auto py-12 md:py-24 px-6 md:px-12">
+            <div className="max-w-3xl mx-auto py-12 md:pt-24 md:pb-32 px-6 md:px-12">
                <div className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 dark:text-white/40 mb-8 md:mb-12`}>
                  Developer Log // {selectedPost.id}
                </div>
@@ -269,7 +269,7 @@ export default function Home() {
                </div>
             </div>
           ) : (
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full pb-32">
               {/* Fixed Hero Area */}
               <div className="relative h-[35vh] md:h-[45vh] border-b border-black dark:border-white flex-shrink-0">
                 <Image
