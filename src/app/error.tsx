@@ -22,10 +22,10 @@ export default function Error({
           {copy.toasts.errorBoundary}
         </div>
         <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
-          Something Went Wrong
+          {copy.toasts.errorHeading}
         </h1>
         <p className="text-white/60 mb-8 font-mono italic text-sm border-l-2 border-white/30 pl-4 text-left">
-          {error.message || 'An unexpected error occurred in the system.'}
+          {error.message || copy.toasts.errorDescription}
         </p>
         <button 
           onClick={reset}

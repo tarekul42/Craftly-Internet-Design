@@ -23,7 +23,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
             <div>
               <h3 className="font-bold text-lg leading-none text-black dark:text-white">{orchestrator.name}</h3>
               <div className="font-mono text-[11px] tracking-widest opacity-50 mt-1 text-black dark:text-white">
-                ID // {orchestrator.id.toUpperCase()}
+                {copy.networkIdLabel.replace('{id}', orchestrator.id.toUpperCase())}
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
       <div className="p-6 flex-1 flex flex-col text-black dark:text-white">
         <div className="mb-6">
           <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
-            Aura // Specialty
+            {copy.networkSpecLabel}
           </div>
           <p className="text-sm font-medium leading-relaxed">
             {orchestrator.specialty}

@@ -36,7 +36,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
           Origin // {item.originalPost.creator}
         </div>
         <h3 className="font-bold text-xl leading-tight mb-4 text-black dark:text-white">
-          {isProject ? projectPost?.name : 'Developer Log'}
+          {isProject ? projectPost?.name : copy.developerLog}
         </h3>
         
         {/* Miniature Logic Map Preview */}
@@ -59,7 +59,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
         onClick={() => toast(copy.toasts.workbenchIntegrate, 'info')}
         className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors bg-brandGray-50 dark:bg-brandGray-950"
       >
-        Inspect / Integrate
+        {copy.inspectAction}
       </button>
     </div>
   );
@@ -81,7 +81,7 @@ export default function WorkbenchPage() {
             {copy.workbenchUnauthorized}
           </p>
           <Button variant="outline" onClick={login} className="text-white border-white hover:bg-white hover:text-black">
-            Initialize Identity
+            {copy.identityAction}
           </Button>
         </div>
       </div>
@@ -92,10 +92,10 @@ export default function WorkbenchPage() {
     <div className="min-h-screen bg-brandGray-100 dark:bg-brandGray-975 pt-32 pb-32 px-6 md:px-12 font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 md:gap-0">
-          <SectionHeader subtitle={copy.workbench} title="Blueprint Archive" />
+          <SectionHeader subtitle={copy.workbench} title={copy.blueprintTitle} />
           <div className="font-mono text-xs uppercase tracking-widest opacity-60 flex items-center gap-2 text-black dark:text-white">
             <span className="text-lg">⑂</span>
-            {workbenchData.length} Forked Nodes
+            {copy.forkedCount.replace('{n}', workbenchData.length.toString())}
           </div>
         </div>
         
@@ -111,13 +111,13 @@ export default function WorkbenchPage() {
             <div className="relative z-10 flex flex-col items-center">
               <div className="font-mono text-6xl opacity-10 mb-8">⑂</div>
               <h2 className="font-mono text-sm md:text-base uppercase tracking-[0.3em] font-bold text-black dark:text-white mb-6">
-                No Nodes in local memory
+                {copy.emptyWorkbench}
               </h2>
               <p className="font-mono italic text-black/60 dark:text-white/60 max-w-lg mb-10 text-lg leading-relaxed">
-                The Workbench is empty. Return to the Console to browse the network and fork architectural logic maps or experience nodes into your private sector.
+                {copy.emptyWorkbenchDesc}
               </p>
               <Link href="/" className="font-mono border border-black/20 dark:border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all bg-white dark:bg-black text-black dark:text-white shadow-elegant">
-                Return to Console
+                {copy.returnLink}
               </Link>
             </div>
           </div>

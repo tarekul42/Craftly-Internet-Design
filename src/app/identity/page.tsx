@@ -19,7 +19,7 @@ export default function IdentityPage() {
             {copy.workbenchUnauthorizedHeading}
           </div>
           <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
-            Access Denied
+            {copy.accessDenied}
           </h1>
           <p className="text-white/60 mb-8 font-mono italic text-lg border-l-2 border-white/30 pl-4">
             &quot;{copy.workbenchUnauthorized}&quot;
@@ -52,10 +52,10 @@ export default function IdentityPage() {
             </div>
             <div>
               <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-2">
-                System.Identity // Orchestrator Profile
+                {copy.identitySubtitle}
               </h2>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-none">
-                USER.NODE_001
+                {copy.broadcastCreator}
               </h1>
             </div>
           </div>
@@ -97,7 +97,7 @@ export default function IdentityPage() {
         {/* Role Selection */}
         <div className="mb-12 border border-black/10 p-8 bg-brandGray-50">
           <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-6">
-            Switch Operational Mode
+            {copy.switchMode}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {(['engineer', 'builder', 'guest'] as const).map((r) => (

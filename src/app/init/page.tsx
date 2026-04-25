@@ -29,7 +29,7 @@ export default function InitNodePage() {
             {copy.workbenchUnauthorizedHeading}
           </div>
           <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
-            Access Denied
+            {copy.accessDenied}
           </h1>
           <p className="text-white/60 mb-8 font-mono italic text-lg border-l-2 border-white/30 pl-4">
             &quot;{copy.workbenchUnauthorized}&quot;
@@ -57,7 +57,7 @@ export default function InitNodePage() {
     setTimeout(() => {
       const basePost = {
         id: `${nodeType.charAt(0)}-${Date.now()}`,
-        creator: 'USER.NODE_001',
+        creator: copy.broadcastCreator,
         signature: 'Local',
         timestamp: new Date().toISOString(),
         metrics: { acknowledgements: 0, audits: 0, forks: 0 }
@@ -75,17 +75,17 @@ export default function InitNodePage() {
           ...basePost,
           type: 'project',
           name: 'Architectural Broadcast',
-          tagline: 'System Node Init',
+          tagline: copy.broadcastProjectTag,
           description: content.trim(),
           heroImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80',
           caseStudy: {
-            problem: 'Initialization of new node architecture.',
+            problem: copy.broadcastProblem,
             solution: content.trim(),
-            impact: 'System expanded.'
+            impact: copy.broadcastImpact
           },
           implementation: {
             logicNodes: [
-              { id: '1', label: 'Init', detail: 'Node initialized via Console' }
+              { id: '1', label: 'Init', detail: copy.broadcastLogic }
             ]
           }
         });
@@ -110,7 +110,7 @@ export default function InitNodePage() {
         <form className="space-y-8" onSubmit={handleSubmit}>
           <div>
             <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-2">
-              Node Type
+              {copy.nodeTypeLabel}
             </label>
             <div className="grid grid-cols-2 gap-4">
               <button 
@@ -119,7 +119,7 @@ export default function InitNodePage() {
                 className={`border p-4 text-left transition-colors ${nodeType === 'project' ? 'border-white bg-white text-black' : 'border-white/20 bg-white/5 text-white hover:border-white'}`}
               >
                 <div className="font-bold mb-1">Project</div>
-                <div className="font-mono text-[11px] opacity-50 uppercase">Architectural Case Study</div>
+                <div className="font-mono text-[11px] opacity-50 uppercase">{copy.projectSubtitle}</div>
               </button>
               <button 
                 type="button" 
@@ -127,14 +127,14 @@ export default function InitNodePage() {
                 className={`border p-4 text-left transition-colors ${nodeType === 'experience' ? 'border-white bg-white text-black' : 'border-white/20 bg-white/5 text-white hover:border-white'}`}
               >
                 <div className="font-bold mb-1">Experience</div>
-                <div className="font-mono text-[11px] opacity-50 uppercase">Developer Log / Reflection</div>
+                <div className="font-mono text-[11px] opacity-50 uppercase">{copy.experienceSubtitle}</div>
               </button>
             </div>
           </div>
 
           <div>
             <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-2">
-              Data Stream (Content)
+              {copy.contentLabel}
             </label>
             <textarea 
               rows={6}
@@ -167,7 +167,7 @@ export default function InitNodePage() {
             {isBroadcasting ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
-                Broadcasting...
+                {copy.broadcasting}
               </span>
             ) : copy.initBroadcast}
           </button>

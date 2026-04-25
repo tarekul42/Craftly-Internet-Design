@@ -58,7 +58,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       originalPost: post,
       forkedAt: new Date().toISOString(),
       status: 'review',
-      notes: "Auto-forked from network."
+      notes: copy.forkNotes
     };
     
     const updated = [newItem, ...workbenchData];

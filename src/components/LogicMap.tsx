@@ -25,7 +25,7 @@ export default function LogicMap({ logicNodes }: { logicNodes: LogicNode[] }) {
               style={{ '--node-index': i } as React.CSSProperties}
             >
               <div className="flex justify-between items-center mb-3 border-b border-black/5 dark:border-white/5 pb-2">
-                <span className="text-[10px] font-bold opacity-30 tracking-tighter">NODE_{node.id}</span>
+                <span className="text-[10px] font-bold opacity-30 tracking-tighter">{node.id}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white opacity-20"></span>
               </div>
               <h4 className="font-bold uppercase text-[13px] mb-1 leading-tight">{node.label}</h4>

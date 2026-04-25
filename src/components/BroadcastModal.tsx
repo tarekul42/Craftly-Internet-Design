@@ -31,7 +31,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
     const newPost: ExperiencePost = {
       id: `e-${Date.now()}`,
       type: 'experience',
-      creator: 'Local Orchestrator', // Could tie to actual user profile if we had one
+      creator: copy.broadcastCreator, // Could tie to actual user profile if we had one
       signature: 'Local',
       timestamp: new Date().toISOString(),
       content: content.trim(),
@@ -60,11 +60,11 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
         
         <form onSubmit={handleSubmit} className="p-8">
           <div className="mb-6">
-            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">Experience Log</label>
+            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">{copy.experienceLabel}</label>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Document your architectural decisions or system reflections..."
+              placeholder={copy.experiencePlaceholder}
               className="w-full h-40 border border-black/10 dark:border-white/10 p-4 font-mono italic text-lg bg-transparent focus:outline-none focus:border-black dark:focus:border-white resize-none"
               required
             />
@@ -76,7 +76,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               type="text"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              placeholder="architecture, philosophy, refactoring"
+              placeholder={copy.tagExamples}
               className="font-mono w-full border border-black/10 dark:border-white/10 p-4 text-xs uppercase tracking-widest bg-transparent focus:outline-none focus:border-black dark:focus:border-white"
             />
           </div>

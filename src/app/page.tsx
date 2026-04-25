@@ -75,18 +75,18 @@ export default function Home() {
                   onClick={() => setStreamMode('LIVE')}
                   className={`font-mono font-bold text-xl tracking-tight transition-opacity ${streamMode === 'LIVE' ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
                 >
-                  Stream.LIVE
+                  {copy.streamLive}
                 </button>
                 <button 
                   onClick={() => setStreamMode('SIGNAL')}
                   className={`font-mono font-bold text-xl tracking-tight transition-opacity flex items-center gap-2 ${streamMode === 'SIGNAL' ? 'opacity-100' : 'opacity-30 hover:opacity-60'}`}
                 >
-                  <span className="text-lg opacity-50">⑂</span> SIGNAL
+                  <span className="text-lg opacity-50">⑂</span> {copy.streamSignal}
                 </button>
               </div>
             </div>
             <div className="font-mono text-[11px] uppercase tracking-widest opacity-30">
-              {displayedFeed.length} Nodes
+              {copy.nodeCount.replace('{n}', displayedFeed.length.toString())}
             </div>
           </div>
           
@@ -165,7 +165,7 @@ export default function Home() {
           ) : (
             <div className="p-12 text-center text-black/40 dark:text-white/40">
               <div className="font-mono text-4xl mb-4">?</div>
-              <div className="font-mono text-xs uppercase tracking-[0.2em]">0 Nodes Match Query</div>
+              <div className="font-mono text-xs uppercase tracking-[0.2em]">{copy.noResults}</div>
             </div>
           )}
         </div>
@@ -247,7 +247,7 @@ export default function Home() {
                     <div className="flex items-center gap-3">
                       <div className="text-lg md:text-xl font-bold font-sans">{selectedPost.creator}</div>
                       {selectedPost.isLead && (
-                        <span className="font-mono text-[11px] bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 rounded-sm font-black">LEAD ORCHESTRATOR</span>
+                        <span className="font-mono text-[11px] bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 rounded-sm font-black">{copy.leadLabel}</span>
                       )}
                     </div>
                    <div className="font-mono text-[11px] md:text-xs opacity-50 uppercase tracking-widest mt-1">
@@ -315,7 +315,7 @@ export default function Home() {
                 {/* Case Study Column */}
                 <div className="w-full md:w-1/2 p-6 md:p-12 pb-24 md:pb-32 bg-white dark:bg-black">
                   <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] mb-8 md:mb-12 text-black/40 dark:text-white/40 border-b border-black/10 dark:border-white/10 pb-2 md:pb-4">
-                    01 // Architectural Case Study
+                    {copy.caseStudyHead}
                   </h4>
                   
                   <p className="text-base md:text-lg font-medium leading-relaxed mb-8 md:mb-12">
@@ -341,7 +341,7 @@ export default function Home() {
                 {/* Visual Breakdown Column */}
                 <div className="w-full md:w-1/2 p-6 md:p-12 pb-24 md:pb-32 bg-gray-50 dark:bg-brandGray-900 relative overflow-hidden min-h-[400px]">
                   <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] mb-6 md:mb-12 text-black/40 dark:text-white/40 border-b border-black/10 dark:border-white/10 pb-2 md:pb-4 relative z-10 bg-gray-50 dark:bg-brandGray-900">
-                    02 // Logic Extraction
+                    {copy.logicHead}
                   </h4>
                   <div className="absolute inset-0 top-16 md:top-32 overflow-auto custom-scrollbar p-4 md:p-8">
                     <LogicMap logicNodes={selectedPost.implementation.logicNodes} />
