@@ -68,7 +68,13 @@ export default function Home() {
           <div className="flex justify-between items-end">
             <div>
               <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-1">
-                {copy.consoleTitle}
+                {role === 'guest' ? (
+                  <>
+                    Explore <span className="font-brand normal-case tracking-tight">Craftly Internet</span>
+                  </>
+                ) : (
+                  copy.consoleTitle
+                )}
               </h2>
               <div className="flex gap-4 items-center">
                 <button 

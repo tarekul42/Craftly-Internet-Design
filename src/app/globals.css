@@ -4,6 +4,15 @@
   --font-brand: var(--font-pacifico), cursive;
   --font-sans: var(--font-inter), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+.font-brand {
+  font-family: var(--font-pacifico), cursive !important;
+  -webkit-text-stroke: 0.35px currentColor;
+  letter-spacing: -0.01em;
+}
+
+@theme {
   
   --color-brandGray-50: #FCFCFC;
   --color-brandGray-100: #F9F9F9;
