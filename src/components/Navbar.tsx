@@ -57,7 +57,7 @@ const Navbar = () => {
           </Link>
           {isRegistered && (
             <Link href="/identity" className={`font-mono text-[11px] uppercase tracking-[0.2em] font-bold hover:opacity-50 transition-opacity whitespace-nowrap ${isActive('/identity') ? 'border-b border-black dark:border-white pb-1' : 'border-b border-transparent pb-1'}`}>
-              Identity
+              {labels.identityNavLink}
             </Link>
           )}
           
@@ -76,7 +76,7 @@ const Navbar = () => {
                   onClick={() => setIsBroadcastOpen(true)}
                   className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all border border-black dark:border-white px-4 py-2 flex items-center gap-2 whitespace-nowrap"
                 >
-                  <span className="text-lg leading-none mt-[-2px]">+</span> {labels.initBroadcast || 'Broadcast'}
+                  <span className="text-lg leading-none mt-[-2px]">+</span> {labels.initBroadcast}
                 </button>
               </>
             ) : (
@@ -117,14 +117,14 @@ const Navbar = () => {
           </Link>
           {isRegistered && (
             <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={`font-mono text-sm uppercase tracking-[0.3em] font-bold hover:opacity-50 ${isActive('/identity') ? 'text-black dark:text-white' : 'text-black/50 dark:text-white/50'}`}>
-              Identity
+              {labels.identityNavLink}
             </Link>
           )}
           <div className="w-8 h-[1px] bg-black/10 dark:bg-white/10 my-2"></div>
           
           {isRegistered ? (
             <button onClick={() => { setIsBroadcastOpen(true); setIsMenuOpen(false); }} className="font-mono text-xs uppercase tracking-[0.2em] font-bold bg-black text-white dark:bg-white dark:text-black px-8 py-4">
-              {labels.initBroadcast || 'Broadcast'} Node
+              {labels.initBroadcast}
             </button>
           ) : (
             <button onClick={() => { login(); setIsMenuOpen(false); }} className="font-mono text-xs uppercase tracking-[0.2em] font-bold bg-black text-white dark:bg-white dark:text-black px-8 py-4">

@@ -27,13 +27,13 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
           {item.status === 'integrating' && <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>}
         </div>
         <div suppressHydrationWarning className="font-mono text-[11px] opacity-70">
-          Forked: {new Date(item.forkedAt).toLocaleDateString()}
+          {copy.forkedDateLabel} {new Date(item.forkedAt).toLocaleDateString()}
         </div>
       </div>
 
       <div className="p-6 border-b border-black/10 dark:border-white/10 flex-1">
         <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
-          Origin // {item.originalPost.creator}
+          {copy.originLabel} {item.originalPost.creator}
         </div>
         <h3 className="font-bold text-xl leading-tight mb-4 text-black dark:text-white">
           {isProject ? projectPost?.name : copy.developerLog}

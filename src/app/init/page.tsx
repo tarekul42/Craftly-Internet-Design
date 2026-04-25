@@ -74,7 +74,7 @@ export default function InitNodePage() {
         broadcastPost({
           ...basePost,
           type: 'project',
-          name: 'Architectural Broadcast',
+          name: copy.broadcastProjectName,
           tagline: copy.broadcastProjectTag,
           description: content.trim(),
           heroImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80',
@@ -85,7 +85,7 @@ export default function InitNodePage() {
           },
           implementation: {
             logicNodes: [
-              { id: '1', label: 'Init', detail: copy.broadcastLogic }
+              { id: '1', label: copy.initLogicLabel, detail: copy.broadcastLogic }
             ]
           }
         });
@@ -118,7 +118,7 @@ export default function InitNodePage() {
                 onClick={() => setNodeType('project')}
                 className={`border p-4 text-left transition-colors ${nodeType === 'project' ? 'border-white bg-white text-black' : 'border-white/20 bg-white/5 text-white hover:border-white'}`}
               >
-                <div className="font-bold mb-1">Project</div>
+                <div className="font-bold mb-1">{copy.projectTypeBtn}</div>
                 <div className="font-mono text-[11px] opacity-50 uppercase">{copy.projectSubtitle}</div>
               </button>
               <button 
@@ -126,7 +126,7 @@ export default function InitNodePage() {
                 onClick={() => setNodeType('experience')}
                 className={`border p-4 text-left transition-colors ${nodeType === 'experience' ? 'border-white bg-white text-black' : 'border-white/20 bg-white/5 text-white hover:border-white'}`}
               >
-                <div className="font-bold mb-1">Experience</div>
+                <div className="font-bold mb-1">{copy.experienceTypeBtn}</div>
                 <div className="font-mono text-[11px] opacity-50 uppercase">{copy.experienceSubtitle}</div>
               </button>
             </div>
@@ -142,20 +142,20 @@ export default function InitNodePage() {
               onChange={(e) => setContent(e.target.value)}
               required
               className="w-full bg-transparent border border-white/20 p-4 text-white focus:outline-none focus:border-white transition-colors resize-none font-mono italic text-lg placeholder:text-white/20"
-              placeholder={nodeType === 'experience' ? "Enter your thought process or reflection here..." : "Describe the problem, solution, and architecture..."}
+              placeholder={nodeType === 'experience' ? copy.experiencePlaceholder : copy.projectPlaceholder}
             ></textarea>
           </div>
 
           <div>
             <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-2">
-              Tags (Optional)
+              {copy.tagsLabel}
             </label>
             <input 
               type="text"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
               className="w-full bg-transparent border border-white/20 p-4 text-white focus:outline-none focus:border-white transition-colors placeholder:text-white/20"
-              placeholder="e.g. performance, architecture, design-systems"
+              placeholder={copy.tagsPlaceholder}
             />
           </div>
 

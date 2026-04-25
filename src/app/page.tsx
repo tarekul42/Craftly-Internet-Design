@@ -124,7 +124,7 @@ export default function Home() {
                       <div className="flex items-center gap-2">
                         <div className="font-bold text-sm leading-none">{post.creator}</div>
                         {post.isLead && (
-                          <span className="font-mono text-[11px] bg-black text-white dark:bg-white dark:text-black px-1 py-0.5 rounded-sm font-black">LEAD</span>
+                          <span className="font-mono text-[11px] bg-black text-white dark:bg-white dark:text-black px-1 py-0.5 rounded-sm font-black">{copy.leadBadgeShort}</span>
                         )}
                       </div>
                       <div className="font-mono text-[11px] opacity-50 mt-1">
@@ -147,7 +147,7 @@ export default function Home() {
                     <span className="font-mono text-[11px]">{post.metrics.acknowledgements}</span>
                   </div>
                   <div className="flex items-center gap-1.5 opacity-60">
-                    <span className="text-[11px] font-mono">[A]</span>
+                    <span className="text-[11px] font-mono">{copy.auditIcon}</span>
                     <span className="font-mono text-[11px]">{post.metrics.audits}</span>
                   </div>
                   <div className="flex items-center gap-1.5 opacity-60">
@@ -193,7 +193,7 @@ export default function Home() {
               className="font-mono text-[11px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity flex items-center gap-1 md:gap-2"
             >
               <span className="w-3 h-3 border border-black dark:border-white inline-block rounded-sm hidden md:inline-block"></span>
-              Ack
+              {copy.ackLabel}
             </button>
             <button 
               onClick={() => {
@@ -296,7 +296,7 @@ export default function Home() {
                           {selectedPost.name}
                         </h1>
                         {selectedPost.isLead && (
-                          <span className="font-mono text-[11px] bg-black text-white dark:bg-white dark:text-black px-3 py-1 rounded-sm font-black">LEAD</span>
+                          <span className="font-mono text-[11px] bg-black text-white dark:bg-white dark:text-black px-3 py-1 rounded-sm font-black">{copy.leadBadgeShort}</span>
                         )}
                       </div>
                       <p className="font-mono text-[11px] md:text-xs uppercase tracking-widest opacity-60">
@@ -324,15 +324,15 @@ export default function Home() {
 
                   <div className="space-y-6 md:space-y-8">
                     <div>
-                      <span className="font-mono text-[11px] font-bold block mb-2 opacity-50">PROBLEM</span>
+                      <span className="font-mono text-[11px] font-bold block mb-2 opacity-50">{copy.problemLabel}</span>
                       <p className="text-sm leading-relaxed border-l border-black/10 dark:border-white/10 pl-4">{selectedPost.caseStudy.problem}</p>
                     </div>
                     <div>
-                      <span className="font-mono text-[11px] font-bold block mb-2 opacity-50">SOLUTION</span>
+                      <span className="font-mono text-[11px] font-bold block mb-2 opacity-50">{copy.solutionLabel}</span>
                       <p className="text-sm leading-relaxed border-l border-black dark:border-white pl-4 font-bold">{selectedPost.caseStudy.solution}</p>
                     </div>
                     <div className="bg-black text-white dark:bg-white dark:text-black p-4 md:p-6 mt-6 md:mt-8 shadow-elegant dark:shadow-elegant-dark">
-                      <span className="font-mono text-[11px] font-bold block mb-2 opacity-50 text-white/50 dark:text-black/50">IMPACT METRIC</span>
+                      <span className="font-mono text-[11px] font-bold block mb-2 opacity-50 text-white/50 dark:text-black/50">{copy.impactLabel}</span>
                       <p className="text-lg md:text-xl font-bold font-sans">{selectedPost.caseStudy.impact}</p>
                     </div>
                   </div>
