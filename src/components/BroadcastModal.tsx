@@ -71,7 +71,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
           </div>
 
           <div className="mb-8">
-            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">Tags (Comma Separated)</label>
+            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">{copy.tagsLabel}</label>
             <input
               type="text"
               value={tagsInput}

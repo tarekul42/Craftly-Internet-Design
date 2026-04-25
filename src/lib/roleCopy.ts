@@ -45,6 +45,7 @@ export const roleCopy = {
     identityAction: "Initialize New Node",
     identityActionDesc: "Broadcast architectural logic to the network",
     switchMode: "Switch Operational Mode",
+    statusLabel: "Status: Active",
     // Init
     initSection: "System.Execute",
     initHeading: "Initialize Node",
@@ -82,6 +83,7 @@ export const roleCopy = {
     forkNotes: "Auto-forked from network.",
     forkedDateLabel: "Forked:",
     originLabel: "Origin //",
+    privateNoteLabel: "Private Note",
     // Broadcast Modal
     experienceLabel: "Experience Log",
     tagExamples: "architecture, philosophy, refactoring",
@@ -108,6 +110,7 @@ export const roleCopy = {
   builder: {
     home: "Dashboard",
     consoleTitle: "The Builder's Dashboard",
+    consoleTitleShort: "Builder.Identity",
     consoleSearch: "Search apps, categories, or metrics...",
     audit: "Optimize",
     fork: "Clone",
@@ -146,6 +149,8 @@ export const roleCopy = {
     identityAction: "Publish New App",
     identityActionDesc: "Launch your app to the community",
     switchMode: "Switch Account Type",
+    statusLabel: "Profile: Active",
+    // Init
     initSection: "Builder.Publish",
     initHeading: "Publish App",
     initBroadcast: "Publish to Network",
@@ -181,6 +186,7 @@ export const roleCopy = {
     forkNotes: "Cloned from community.",
     forkedDateLabel: "Cloned:",
     originLabel: "From //",
+    privateNoteLabel: "Studio Notes",
     experienceLabel: "Quick Update",
     tagExamples: "product-update, release, feature",
     toasts: {
@@ -206,6 +212,7 @@ export const roleCopy = {
   guest: {
     home: "Explore",
     consoleTitle: "Explore Craftly Internet",
+    consoleTitleShort: "Guest.Session",
     consoleSearch: "Search by need (e.g., 'minimal portfolio')...",
     audit: "Rate",
     fork: "Save",
@@ -244,6 +251,8 @@ export const roleCopy = {
     identityAction: "Join a Network",
     identityActionDesc: "Connect with others in the community",
     switchMode: "Change View",
+    statusLabel: "Status: Browsing",
+    // Init
     initSection: "Get Started",
     initHeading: "Share Something",
     initBroadcast: "Post to Community",
@@ -263,7 +272,7 @@ export const roleCopy = {
     contentLabel: "What's on your mind?",
     projectPlaceholder: "What are you sharing?",
     experiencePlaceholder: "What's on your mind?",
-    tagsLabel: "Tags (Optional)",
+    tagsLabel: "Tags",
     tagsPlaceholder: "e.g. design, technology, ideas",
     broadcasting: "Posting...",
     workbench: "Bookmarks",
@@ -279,6 +288,7 @@ export const roleCopy = {
     forkNotes: "Saved from explore.",
     forkedDateLabel: "Saved:",
     originLabel: "From //",
+    privateNoteLabel: "Bookmark Notes",
     experienceLabel: "Your Story",
     tagExamples: "design, technology, ideas",
     toasts: {

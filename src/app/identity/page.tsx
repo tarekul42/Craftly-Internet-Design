@@ -60,7 +60,7 @@ export default function IdentityPage() {
             </div>
           </div>
           <div className="font-mono text-[11px] uppercase tracking-widest opacity-30 mt-6 md:mt-0">
-            Status: Active
+            {copy.statusLabel}
           </div>
         </div>
 

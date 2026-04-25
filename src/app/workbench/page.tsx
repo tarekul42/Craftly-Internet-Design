@@ -50,7 +50,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
         )}
 
         <div className="bg-black dark:bg-white text-white dark:text-black p-4 border border-black/10 shadow-elegant">
-          <div className="font-mono text-[11px] uppercase tracking-widest opacity-60 mb-1">Private Note</div>
+          <div className="font-mono text-[11px] uppercase tracking-widest opacity-60 mb-1">{copy.privateNoteLabel}</div>
           <p className="text-sm font-mono italic">{item.notes}</p>
         </div>
       </div>
