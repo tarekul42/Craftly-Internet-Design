@@ -1,7 +1,4 @@
 import React from 'react';
-import { JetBrains_Mono } from 'next/font/google';
-
-const mono = JetBrains_Mono({ subsets: ['latin'] });
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
@@ -9,7 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = 'primary', children, className = '', ...props }: ButtonProps) {
-  const baseStyles = `${mono.className} text-[10px] uppercase tracking-[0.3em] font-bold transition-all whitespace-nowrap flex items-center justify-center`;
+  const baseStyles = "font-mono text-[11px] uppercase tracking-[0.3em] font-bold transition-all whitespace-nowrap flex items-center justify-center";
   
   const variants = {
     primary: "border border-black dark:border-white px-6 py-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black bg-white text-black dark:bg-black dark:text-white",

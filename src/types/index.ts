@@ -1,5 +1,3 @@
-export type LayoutVariant = 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6';
-
 export interface LogicNode {
   id: string;
   label: string;

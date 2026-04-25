@@ -68,7 +68,18 @@ export function DataProvider({ children }: { children: ReactNode }) {
   };
 
   if (!isInitialized) {
-    return null; // or a loading spinner
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-white dark:bg-black">
+        <div className="flex flex-col items-center gap-6">
+          <div className="w-12 h-12 border-2 border-black dark:border-white flex items-center justify-center">
+            <div className="w-3 h-3 bg-black dark:bg-white animate-pulse"></div>
+          </div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-black/40 dark:text-white/40 animate-pulse">
+            Initializing Console...
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -2,12 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { JetBrains_Mono } from 'next/font/google';
 import { useToast } from '@/components/Toast';
 import { useAuth } from '@/components/Auth';
 import { useTheme } from '@/components/ThemeContext';
-
-const mono = JetBrains_Mono({ subsets: ['latin'] });
 
 export function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,22 +62,22 @@ export function CommandPalette() {
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center border-b border-black dark:border-white px-4 py-4">
-          <span className={`${mono.className} text-black dark:text-white mr-3`}>{'>'}</span>
+          <span className="font-mono text-black dark:text-white mr-3">{'>'}</span>
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search commands..."
-            className={`${mono.className} flex-1 bg-transparent border-none outline-none text-black dark:text-white uppercase tracking-widest text-sm placeholder-black/30 dark:placeholder-white/30`}
+            className="font-mono flex-1 bg-transparent border-none outline-none text-black dark:text-white uppercase tracking-widest text-sm placeholder-black/30 dark:placeholder-white/30"
           />
-          <div className={`${mono.className} text-[10px] text-black/50 dark:text-white/50 bg-black/5 dark:bg-white/10 px-2 py-1`}>
+          <div className="font-mono text-[11px] text-black/50 dark:text-white/50 bg-black/5 dark:bg-white/10 px-2 py-1">
             ESC to close
           </div>
         </div>
         <div className="max-h-[50vh] overflow-y-auto custom-scrollbar py-2">
           {query === '' && filteredCommands.length > 0 && (
-            <div className={`${mono.className} px-6 py-2 text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40 font-bold`}>
+            <div className="font-mono px-6 py-2 text-[11px] uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
               [ Quick Actions ]
             </div>
           )}
@@ -89,14 +86,14 @@ export function CommandPalette() {
               <button
                 key={cmd.id}
                 onClick={() => handleSelect(cmd.action)}
-                className={`${mono.className} w-full text-left px-6 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-xs uppercase tracking-widest flex items-center justify-between group`}
+                className="font-mono w-full text-left px-6 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-xs uppercase tracking-widest flex items-center justify-between group"
               >
                 <span>{cmd.label}</span>
                 <span className="opacity-0 group-hover:opacity-100 transition-opacity">↵</span>
               </button>
             ))
           ) : (
-            <div className={`${mono.className} text-center py-12 text-black/40 dark:text-white/40 uppercase tracking-widest text-xs`}>
+            <div className="font-mono text-center py-12 text-black/40 dark:text-white/40 uppercase tracking-widest text-xs">
               No commands found
             </div>
           )}

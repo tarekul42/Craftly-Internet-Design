@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap');
-
 @import "tailwindcss";
 
 @theme {
@@ -75,6 +73,23 @@ body {
   background: var(--foreground);
 }
 
+/* Custom scrollbar variant for nested scrollable areas */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
 /* Rule 1: Enforce grayscale imagery */
 img {
   filter: grayscale(100%);
@@ -83,4 +98,53 @@ img {
 
 img:hover {
   filter: grayscale(0%);
+}
+
+/* Toast slide-up animation (moved from Toast.tsx inline styles) */
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* LogicMap staggered entrance animation (replaces framer-motion) */
+@keyframes logic-node-enter {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes logic-line-grow {
+  from {
+    height: 0;
+  }
+  to {
+    height: 48px;
+  }
+}
+
+.logic-node-animate {
+  animation: logic-node-enter 0.4s ease forwards;
+  animation-delay: calc(var(--node-index) * 0.2s);
+  opacity: 0;
+}
+
+.logic-line-animate {
+  animation: logic-line-grow 0.2s ease forwards;
+  animation-delay: calc(var(--node-index) * 0.2s + 0.1s);
+  height: 0;
 }

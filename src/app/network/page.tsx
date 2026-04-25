@@ -1,29 +1,20 @@
 'use client';
 
-import { JetBrains_Mono, Inter } from 'next/font/google';
 import { orchestrators } from '@/data/mockData';
 import { Orchestrator } from '@/types';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-
-const mono = JetBrains_Mono({ subsets: ['latin'] });
-const inter = Inter({ subsets: ['latin'] });
-
 import { useToast } from '@/components/Toast';
 import { useAuth } from '@/components/Auth';
+import { getRoleCopy } from '@/lib/roleCopy';
 
 const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
   const { toast } = useToast();
   const { isRegistered, role } = useAuth();
-
-  const roleCopy = {
-    engineer: { action: "Ping Node", metric1: "Broadcasts", metric2: "Fork Rate" },
-    builder: { action: "Message", metric1: "Apps", metric2: "Install Rate" },
-    guest: { action: "Connect", metric1: "Posts", metric2: "Impact" },
-  }[role];
+  const copy = getRoleCopy(role);
   
   return (
-    <div className="border border-black dark:border-white bg-white dark:bg-black flex flex-col group hover:shadow-[4px_4px_0_0_#000] dark:hover:shadow-[4px_4px_0_0_#fff] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-500">
-      <div className="p-6 border-b border-black dark:border-white flex justify-between items-start bg-[#fcfcfc] dark:bg-[#0a0a0a]">
+    <div className="border border-black dark:border-white bg-white dark:bg-black flex flex-col group hover:brutal-shadow dark:hover:brutal-shadow-dark hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-500">
+      <div className="p-6 border-b border-black dark:border-white flex justify-between items-start bg-brandGray-50 dark:bg-brandGray-950">
         <div>
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-brand text-xl">
@@ -31,7 +22,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
             </div>
             <div>
               <h3 className="font-bold text-lg leading-none text-black dark:text-white">{orchestrator.name}</h3>
-              <div className={`${mono.className} text-[9px] tracking-widest opacity-50 mt-1 text-black dark:text-white`}>
+              <div className="font-mono text-[11px] tracking-widest opacity-50 mt-1 text-black dark:text-white">
                 ID // {orchestrator.id.toUpperCase()}
               </div>
             </div>
@@ -42,7 +33,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
       
       <div className="p-6 flex-1 flex flex-col text-black dark:text-white">
         <div className="mb-6">
-          <div className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2`}>
+          <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
             Aura // Specialty
           </div>
           <p className="text-sm font-medium leading-relaxed">
@@ -52,11 +43,11 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
 
         <div className="mt-auto grid grid-cols-2 gap-4 border-t border-black/10 dark:border-white/10 pt-6">
           <div>
-            <div className={`${mono.className} text-[10px] uppercase opacity-50 mb-1`}>{roleCopy.metric1}</div>
+            <div className="font-mono text-[11px] uppercase opacity-50 mb-1">{copy.networkMetric1}</div>
             <div className="font-bold text-xl font-mono">{orchestrator.metrics.nodesBroadcasted}</div>
           </div>
           <div>
-            <div className={`${mono.className} text-[10px] uppercase opacity-50 mb-1`}>{roleCopy.metric2}</div>
+            <div className="font-mono text-[11px] uppercase opacity-50 mb-1">{copy.networkMetric2}</div>
             <div className="font-bold text-xl font-mono flex items-center gap-1">
               <span className="text-sm opacity-50">⑂</span> {orchestrator.metrics.forkRate}
             </div>
@@ -72,9 +63,9 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
           }
           toast(`[NETWORK] NODE PINGED: ${orchestrator.id.toUpperCase()}`, 'success');
         }}
-        className={`${mono.className} w-full text-[10px] uppercase tracking-[0.3em] font-bold border-t border-black dark:border-white py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-black dark:text-white`}
+        className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold border-t border-black dark:border-white py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-black dark:text-white"
       >
-        {roleCopy.action}
+        {copy.networkAction}
       </button>
     </div>
   );
@@ -82,21 +73,16 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
 
 export default function NetworkPage() {
   const { role } = useAuth();
-  
-  const roleCopy = {
-    engineer: { section: "System.Network", title: "Global Nodes", count: "Active Orchestrators" },
-    builder: { section: "Builder.Community", title: "Top Creators", count: "Builders Online" },
-    guest: { section: "Explore.People", title: "Global Community", count: "People Exploring" },
-  }[role];
+  const copy = getRoleCopy(role);
 
   return (
-    <div className={`min-h-screen bg-[#F9F9F9] dark:bg-[#050505] pt-32 pb-32 px-6 md:px-12 ${inter.className}`}>
+    <div className="min-h-screen bg-brandGray-100 dark:bg-brandGray-975 pt-32 pb-32 px-6 md:px-12 font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 md:gap-0">
-          <SectionHeader subtitle={roleCopy.section} title={roleCopy.title} />
-          <div className={`${mono.className} text-xs uppercase tracking-widest opacity-60 flex items-center gap-3 text-black dark:text-white`}>
+          <SectionHeader subtitle={copy.networkSection} title={copy.networkTitle} />
+          <div className="font-mono text-xs uppercase tracking-widest opacity-60 flex items-center gap-3 text-black dark:text-white">
             <span className="w-3 h-3 bg-black dark:bg-white rounded-full animate-pulse"></span>
-            {orchestrators.filter(o => o.status === 'active').length} {roleCopy.count}
+            {orchestrators.filter(o => o.status === 'active').length} {copy.networkCount}
           </div>
         </div>
         
