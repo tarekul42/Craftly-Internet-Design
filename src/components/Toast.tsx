@@ -35,10 +35,10 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
         {toasts.map((t) => (
           <div 
             key={t.id}
-            className={`animate-slide-up-fade px-6 py-4 border ${t.type === 'success' ? 'bg-white text-black border-black' : 'bg-black text-white border-white/20'} shadow-[4px_4px_0_0_rgba(0,0,0,0.2)]`}
+            className={`animate-slide-up-fade px-6 py-4 border border-black/10 dark:border-white/10 ${t.type === 'success' ? 'bg-white text-black' : 'bg-black text-white'} shadow-elegant dark:shadow-elegant-dark`}
           >
             <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] flex items-center gap-3">
-              <span className={`w-2 h-2 rounded-full ${t.type === 'success' ? 'bg-black' : 'bg-white animate-pulse'}`}></span>
+              <span className={`w-1.5 h-1.5 rounded-full ${t.type === 'success' ? 'bg-black' : 'bg-white animate-pulse'}`}></span>
               {t.message}
             </div>
           </div>

@@ -9,17 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Strict Monochrome Palette
         black: "#000000",
         white: "#FFFFFF",
         brandGray: {
-          50: "#FCFCFC",    // card headers, button backgrounds
-          100: "#F9F9F9",   // page backgrounds (light mode)
-          light: "#F5F5F5", // modal headers
-          900: "#111111",   // hover/secondary sections (dark mode)
-          950: "#0a0a0a",   // card headers (dark mode)
-          975: "#050505",   // page backgrounds (dark mode)
-          dark: "#1A1A1A",  // modal headers (dark mode)
+          50: "#FCFCFC",
+          100: "#F9F9F9",
+          light: "#F5F5F5",
+          900: "#111111",
+          950: "#0a0a0a",
+          975: "#050505",
+          dark: "#1A1A1A",
         }
       },
       fontFamily: {
@@ -27,16 +26,20 @@ const config: Config = {
         sans: ["var(--font-inter)", "sans-serif"], 
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
+      boxShadow: {
+        'elegant': '0 4px 12px rgba(0,0,0,0.08)',
+        'elegant-dark': '0 4px 12px rgba(255,255,255,0.08)',
+      }
     },
   },
   plugins: [
     plugin(function({ addUtilities }) {
       addUtilities({
-        '.brutal-shadow': {
-          'box-shadow': '4px 4px 0 0 #000',
+        '.elegant-shadow': {
+          'box-shadow': '0 4px 12px rgba(0,0,0,0.08)',
         },
-        '.brutal-shadow-dark': {
-          'box-shadow': '4px 4px 0 0 #fff',
+        '.elegant-shadow-dark': {
+          'box-shadow': '0 4px 12px rgba(255,255,255,0.08)',
         },
       });
     }),

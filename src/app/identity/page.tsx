@@ -45,13 +45,13 @@ export default function IdentityPage() {
       <div className="max-w-4xl mx-auto p-6 md:p-12">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-black pb-8 md:pb-12 mb-8 md:mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-black/10 pb-8 md:pb-12 mb-8 md:mb-12">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-black text-white flex items-center justify-center font-brand text-4xl md:text-5xl flex-shrink-0">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-black text-white flex items-center justify-center font-bold text-4xl md:text-5xl flex-shrink-0">
               U
             </div>
             <div>
-              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-black/40 mb-2">
+              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-2">
                 System.Identity // Orchestrator Profile
               </h2>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-none">
@@ -66,7 +66,7 @@ export default function IdentityPage() {
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="border border-black p-6 md:p-8 bg-gray-50">
+          <div className="border border-black/10 p-6 md:p-8 bg-brandGray-50">
             <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-4">
               {copy.identityMetric1Label}
             </div>
@@ -75,7 +75,7 @@ export default function IdentityPage() {
             </div>
           </div>
           
-          <div className="border border-black p-6 md:p-8 bg-gray-50">
+          <div className="border border-black/10 p-6 md:p-8 bg-brandGray-50">
             <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-4">
               {copy.identityMetric2Label}
             </div>
@@ -84,7 +84,7 @@ export default function IdentityPage() {
             </div>
           </div>
 
-          <div className="border border-black p-6 md:p-8 bg-gray-50">
+          <div className="border border-black/10 p-6 md:p-8 bg-brandGray-50">
             <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-4">
               {copy.identityMetric3Label}
             </div>
@@ -95,8 +95,8 @@ export default function IdentityPage() {
         </div>
 
         {/* Role Selection */}
-        <div className="mb-12 border-2 border-black p-8">
-          <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-black/40 mb-6">
+        <div className="mb-12 border border-black/10 p-8 bg-brandGray-50">
+          <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-6">
             Switch Operational Mode
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,7 +104,7 @@ export default function IdentityPage() {
               <button
                 key={r}
                 onClick={() => setRole(r)}
-                className={`font-mono text-[11px] uppercase tracking-[0.2em] font-bold py-4 border transition-all ${role === r ? 'bg-black text-white border-black' : 'bg-transparent text-black border-black/20 hover:border-black'}`}
+                className={`font-mono text-[11px] uppercase tracking-[0.2em] font-bold py-4 border transition-all ${role === r ? 'bg-black text-white border-black' : 'bg-transparent text-black border-black/10 hover:border-black'}`}
               >
                 {r.toUpperCase()}
               </button>
@@ -115,7 +115,7 @@ export default function IdentityPage() {
         <div className="mb-24">
           <Link 
             href="/init"
-            className="group block border-2 border-black p-8 md:p-12 hover:bg-black transition-colors"
+            className="group block border border-black/10 p-8 md:p-12 hover:bg-black transition-colors shadow-elegant"
           >
             <div className="flex justify-between items-center">
               <div>
@@ -135,7 +135,7 @@ export default function IdentityPage() {
         <div className="border-t border-black/10 pt-12 flex justify-center">
           <button 
             onClick={handleLogout}
-            className="font-mono text-[11px] uppercase tracking-[0.3em] font-bold text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-black dark:border-white px-8 py-4 transition-all"
+            className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-black/10 dark:border-white/10 px-8 py-4 transition-all"
           >
             [TERMINATE CONNECTION]
           </button>

@@ -1,12 +1,14 @@
-import type { Metadata } from "next";
+'use client';
+
 import { Inter, JetBrains_Mono, Pacifico } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/components/Auth";
+import { DataProvider } from "@/components/DataContext";
+import { ThemeProvider } from "@/components/ThemeContext";
 import Navbar from "@/components/Navbar";
 import { ToastProvider } from "@/components/Toast";
-import { AuthProvider } from "@/components/Auth";
-import { ThemeProvider } from "@/components/ThemeContext";
-import { DataProvider } from "@/components/DataContext";
 import { CommandPalette } from "@/components/CommandPalette";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,37 +21,36 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const pacifico = Pacifico({
-  weight: "400",
   variable: "--font-pacifico",
+  weight: "400",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Craftly Internet",
-  description: "A professional platform for builders and developers to showcase their experience.",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${pacifico.variable} antialiased bg-white dark:bg-black text-black dark:text-white transition-colors duration-300`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${pacifico.variable} antialiased`}
       >
-        <ThemeProvider>
-          <AuthProvider>
-            <DataProvider>
+        <AuthProvider>
+          <DataProvider>
+            <ThemeProvider>
               <ToastProvider>
                 <Navbar />
+                <main key={pathname} className="page-transition-wrapper">
+                  {children}
+                </main>
                 <CommandPalette />
-                {children}
               </ToastProvider>
-            </DataProvider>
-          </AuthProvider>
-        </ThemeProvider>
+            </ThemeProvider>
+          </DataProvider>
+        </AuthProvider>
       </body>
     </html>
   );

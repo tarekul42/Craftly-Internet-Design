@@ -13,11 +13,11 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
   const copy = getRoleCopy(role);
   
   return (
-    <div className="border border-black dark:border-white bg-white dark:bg-black flex flex-col group hover:brutal-shadow dark:hover:brutal-shadow-dark hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-500">
-      <div className="p-6 border-b border-black dark:border-white flex justify-between items-start bg-brandGray-50 dark:bg-brandGray-950">
+    <div className="border border-black/10 dark:border-white/10 bg-white dark:bg-black flex flex-col group hover:shadow-elegant dark:hover:shadow-elegant-dark transition-all duration-500">
+      <div className="p-6 border-b border-black/10 dark:border-white/10 flex justify-between items-start bg-brandGray-50 dark:bg-brandGray-950">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-brand text-xl">
+            <div className="w-10 h-10 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-lg">
               {orchestrator.name.charAt(0)}
             </div>
             <div>
@@ -63,7 +63,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
           }
           toast(`[NETWORK] NODE PINGED: ${orchestrator.id.toUpperCase()}`, 'success');
         }}
-        className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold border-t border-black dark:border-white py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-black dark:text-white"
+        className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold border-t border-black/10 dark:border-white/10 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-black dark:text-white"
       >
         {copy.networkAction}
       </button>

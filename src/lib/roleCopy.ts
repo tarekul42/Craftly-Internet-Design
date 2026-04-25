@@ -3,6 +3,7 @@ import { UserRole } from '@/types';
 export const roleCopy = {
   engineer: {
     // Console (Home)
+    home: "Console",
     consoleTitle: "The Orchestrator's Console",
     consoleSearch: "type:project tags:auth metrics.forks>100",
     audit: "Audit",
@@ -30,8 +31,13 @@ export const roleCopy = {
     initSection: "System.Execute",
     initHeading: "Initialize Node",
     initBroadcast: "Broadcast to Console",
+    // Workbench
+    workbench: "Workbench",
+    workbenchUnauthorized: "The private sector is restricted to registered Orchestrators. You must initialize an identity to establish a Workbench and fork logic from the network.",
+    workbenchUnauthorizedHeading: "[SYSTEM ERROR] UNREGISTERED NODE",
   },
   builder: {
+    home: "Dashboard",
     consoleTitle: "The Builder's Dashboard",
     consoleSearch: "Search apps, categories, or metrics...",
     audit: "Optimize",
@@ -56,8 +62,12 @@ export const roleCopy = {
     initSection: "Builder.Publish",
     initHeading: "Publish App",
     initBroadcast: "Publish to Network",
+    workbench: "Studio",
+    workbenchUnauthorized: "Access to the Studio requires a registered account. Sign in to start building and publishing your apps.",
+    workbenchUnauthorizedHeading: "Account Required",
   },
   guest: {
+    home: "Explore",
     consoleTitle: "Explore Craftly Internet",
     consoleSearch: "Search by need (e.g., 'minimal portfolio')...",
     audit: "Rate",
@@ -79,9 +89,12 @@ export const roleCopy = {
     identityMetric3Icon: "◈",
     identityAction: "Join a Network",
     identityActionDesc: "Connect with other digital orchestrators",
-    initSection: "System.Execute",
-    initHeading: "Initialize Node",
-    initBroadcast: "Broadcast to Console",
+    initSection: "Get Started",
+    initHeading: "Share Something",
+    initBroadcast: "Post to Community",
+    workbench: "Bookmarks",
+    workbenchUnauthorized: "This area is for members. Create an account to save your favorite nodes and join the community.",
+    workbenchUnauthorizedHeading: "Welcome, Guest",
   },
 } as const satisfies Record<UserRole, Record<string, string>>;
 

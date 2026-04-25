@@ -8,6 +8,7 @@ import LogicMap from '@/components/LogicMap';
 import { useData } from '@/components/DataContext';
 import { useToast } from '@/components/Toast';
 import { useAuth } from '@/components/Auth';
+import { getRoleCopy } from '@/lib/roleCopy';
 
 const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
   const isProject = item.originalPost.type === 'project';
@@ -15,8 +16,8 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
   const { toast } = useToast();
   
   return (
-    <div className="border border-black dark:border-white bg-white dark:bg-black flex flex-col group hover:brutal-shadow dark:hover:brutal-shadow-dark hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-500 overflow-hidden">
-      <div className="p-4 border-b border-black dark:border-white flex justify-between items-center bg-black dark:bg-white text-white dark:text-black">
+    <div className="border border-black/10 dark:border-white/10 bg-white dark:bg-black flex flex-col group hover:shadow-elegant transition-all duration-500 overflow-hidden">
+      <div className="p-4 border-b border-black/10 dark:border-white/10 flex justify-between items-center bg-black dark:bg-white text-white dark:text-black">
         <div className="flex items-center gap-2">
           <span className="font-mono text-[11px] uppercase tracking-widest">
             {item.status}
@@ -28,7 +29,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
         </div>
       </div>
 
-      <div className="p-6 border-b border-black dark:border-white flex-1">
+      <div className="p-6 border-b border-black/10 dark:border-white/10 flex-1">
         <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
           Origin // {item.originalPost.creator}
         </div>
@@ -38,7 +39,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
         
         {/* Miniature Logic Map Preview */}
         {isProject && projectPost && (
-          <div className="border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-brandGray-900 p-4 h-48 overflow-hidden relative pointer-events-none mb-6">
+          <div className="border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-brandGray-900 p-4 h-48 overflow-hidden relative pointer-events-none mb-6">
             <div className="absolute inset-0 scale-[0.6] origin-top-left p-4">
               <LogicMap logicNodes={projectPost.implementation.logicNodes} />
             </div>
@@ -46,7 +47,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
           </div>
         )}
 
-        <div className="bg-black dark:bg-white text-white dark:text-black p-4 border border-white dark:border-black">
+        <div className="bg-black dark:bg-white text-white dark:text-black p-4 border border-black/10 shadow-elegant">
           <div className="font-mono text-[11px] uppercase tracking-widest opacity-60 mb-1">Private Note</div>
           <p className="text-sm font-mono italic">{item.notes}</p>
         </div>
@@ -63,19 +64,19 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
 };
 
 export default function WorkbenchPage() {
-  const { isRegistered, login } = useAuth();
+  const { isRegistered, login, role } = useAuth();
   const { workbenchData } = useData();
+  const copy = getRoleCopy(role);
 
   if (!isRegistered) {
     return (
       <div className="min-h-screen bg-black pt-32 pb-32 px-6 md:px-12 flex items-center justify-center font-sans">
-        <div className="border-double border-4 border-white bg-black/5 p-12 max-w-2xl w-full text-center flex flex-col items-center">
-          <div className="font-mono text-white text-6xl mb-6">!</div>
-          <h2 className="font-mono text-white font-bold tracking-widest uppercase mb-4">
-            [SYSTEM ERROR] UNREGISTERED NODE
+        <div className="border border-white/20 bg-white/5 p-12 max-w-2xl w-full text-center flex flex-col items-center shadow-2xl backdrop-blur-sm">
+          <h2 className="font-mono text-white font-bold tracking-widest uppercase mb-4 text-lg">
+            {copy.workbenchUnauthorizedHeading}
           </h2>
-          <p className="text-white/60 font-mono italic mb-12">
-            The private sector is restricted to registered Orchestrators. You must initialize an identity to establish a Workbench and fork logic from the network.
+          <p className="text-white/60 font-mono italic mb-12 text-base leading-relaxed">
+            {copy.workbenchUnauthorized}
           </p>
           <Button variant="outline" onClick={login} className="text-white border-white hover:bg-white hover:text-black">
             Initialize Identity
@@ -103,17 +104,17 @@ export default function WorkbenchPage() {
             ))}
           </div>
         ) : (
-          <div className="border-2 border-dashed border-black/20 dark:border-white/20 p-12 md:p-24 bg-transparent flex flex-col items-center justify-center text-center min-h-[50vh] relative group">
+          <div className="border border-dashed border-black/10 dark:border-white/10 p-12 md:p-24 bg-transparent flex flex-col items-center justify-center text-center min-h-[50vh] relative group">
             <div className="absolute inset-0 bg-black/[0.02] dark:bg-white/[0.02] group-hover:bg-transparent transition-colors"></div>
             <div className="relative z-10 flex flex-col items-center">
-              <div className="font-mono text-6xl opacity-20 mb-8">⑂</div>
+              <div className="font-mono text-6xl opacity-10 mb-8">⑂</div>
               <h2 className="font-mono text-sm md:text-base uppercase tracking-[0.3em] font-bold text-black dark:text-white mb-6">
-                [ SYSTEM ] NO NODES IN LOCAL MEMORY.
+                No Nodes in local memory
               </h2>
               <p className="font-mono italic text-black/60 dark:text-white/60 max-w-lg mb-10 text-lg leading-relaxed">
                 The Workbench is empty. Return to the Console to browse the network and fork architectural logic maps or experience nodes into your private sector.
               </p>
-              <Link href="/" className="font-mono border border-black dark:border-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all bg-white dark:bg-black text-black dark:text-white">
+              <Link href="/" className="font-mono border border-black/20 dark:border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all bg-white dark:bg-black text-black dark:text-white shadow-elegant">
                 Return to Console
               </Link>
             </div>

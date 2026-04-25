@@ -34,10 +34,6 @@ body {
 }
 
 @layer utilities {
-  .grayscale-hover {
-    @apply grayscale transition-all duration-700 hover:grayscale-0;
-  }
-
   /* Smooth transitions for high-end feel */
   .smooth-transition {
     @apply transition-all duration-500 ease-in-out;
@@ -53,10 +49,6 @@ body {
       linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
-  }
-
-  .sharp-border {
-    border: 1px solid black;
   }
 }
 
@@ -90,17 +82,28 @@ body {
   background: #fff;
 }
 
-/* Rule 1: Enforce grayscale imagery */
+/* Rule 1: Enforce grayscale imagery (Strict Monochrome) */
 img {
-  filter: grayscale(100%);
-  transition: filter 0.5s ease;
+  filter: grayscale(100%) !important;
 }
 
-img:hover {
-  filter: grayscale(0%);
+/* Page transitions */
+.page-transition-wrapper {
+  animation: page-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Toast slide-up animation (moved from Toast.tsx inline styles) */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Toast slide-up animation */
 @keyframes slide-up-fade {
   0% {
     opacity: 0;
@@ -116,10 +119,10 @@ img:hover {
   animation: slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* LogicMap staggered entrance animation (replaces framer-motion) */
+/* LogicMap staggered entrance animation */
 @keyframes logic-node-enter {
   from {
-    transform: scale(0.9);
+    transform: scale(0.98);
     opacity: 0;
   }
   to {
@@ -138,13 +141,13 @@ img:hover {
 }
 
 .logic-node-animate {
-  animation: logic-node-enter 0.4s ease forwards;
-  animation-delay: calc(var(--node-index) * 0.2s);
+  animation: logic-node-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--node-index) * 0.1s);
   opacity: 0;
 }
 
 .logic-line-animate {
-  animation: logic-line-grow 0.2s ease forwards;
-  animation-delay: calc(var(--node-index) * 0.2s + 0.1s);
+  animation: logic-line-grow 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--node-index) * 0.1s + 0.2s);
   height: 0;
 }

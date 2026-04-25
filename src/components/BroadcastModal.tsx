@@ -45,37 +45,37 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-black w-full max-w-2xl border-2 border-black dark:border-white shadow-[8px_8px_0_0_#000] dark:shadow-[8px_8px_0_0_#fff]">
-        <div className="border-b-2 border-black dark:border-white p-4 flex justify-between items-center bg-brandGray-light dark:bg-brandGray-dark">
-          <div className="font-mono text-[11px] uppercase font-bold tracking-widest">
+    <div className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-black w-full max-w-2xl border border-black/10 dark:border-white/10 shadow-2xl">
+        <div className="border-b border-black/10 dark:border-white/10 p-4 flex justify-between items-center bg-brandGray-50 dark:bg-brandGray-950">
+          <div className="font-mono text-[11px] uppercase font-bold tracking-[0.2em] text-black/40 dark:text-white/40">
             Broadcast Protocol // Active
           </div>
-          <button onClick={onClose} className="hover:opacity-50">
-            [X]
+          <button onClick={onClose} className="hover:opacity-50 font-mono text-[11px] uppercase tracking-widest opacity-40">
+            Close [X]
           </button>
         </div>
         
         <form onSubmit={handleSubmit} className="p-8">
           <div className="mb-6">
-            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2">Experience Log</label>
+            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">Experience Log</label>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Document your architectural decisions or system reflections..."
-              className="w-full h-40 border border-black dark:border-white p-4 font-mono italic text-lg bg-transparent focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white resize-none"
+              className="w-full h-40 border border-black/10 dark:border-white/10 p-4 font-mono italic text-lg bg-transparent focus:outline-none focus:border-black dark:focus:border-white resize-none"
               required
             />
           </div>
 
           <div className="mb-8">
-            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2">Tags (Comma Separated)</label>
+            <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">Tags (Comma Separated)</label>
             <input
               type="text"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
               placeholder="architecture, philosophy, refactoring"
-              className="font-mono w-full border border-black dark:border-white p-4 text-xs uppercase tracking-widest bg-transparent focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+              className="font-mono w-full border border-black/10 dark:border-white/10 p-4 text-xs uppercase tracking-widest bg-transparent focus:outline-none focus:border-black dark:focus:border-white"
             />
           </div>
 
@@ -89,9 +89,9 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
             </button>
             <button 
               type="submit"
-              className="font-mono px-8 py-3 bg-black text-white dark:bg-white dark:text-black text-xs uppercase font-bold tracking-widest hover:bg-black/80 dark:hover:bg-white/80 transition-colors shadow-[4px_4px_0_0_#000] dark:shadow-[4px_4px_0_0_#fff] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+              className="font-mono px-8 py-3 bg-black text-white dark:bg-white dark:text-black text-xs uppercase font-bold tracking-widest hover:opacity-80 transition-all shadow-elegant dark:shadow-elegant-dark"
             >
-              Broadcast
+              Broadcast Node
             </button>
           </div>
         </form>
