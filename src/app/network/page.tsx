@@ -1,11 +1,11 @@
 'use client';
 
-import { orchestrators } from '@/data/mockData';
 import { Orchestrator } from '@/types';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { useToast } from '@/components/Toast';
 import { useAuth } from '@/components/Auth';
 import { getRoleCopy } from '@/lib/roleCopy';
+import { orchestratorsByRole } from '@/data/mockData';
 
 const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
   const { toast } = useToast();
@@ -58,10 +58,10 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
       <button 
         onClick={() => {
           if (!isRegistered) {
-            toast('[ERROR] UNAUTHORIZED. INITIALIZE IDENTITY.', 'warning');
+            toast(copy.toasts.unauthorized, 'warning');
             return;
           }
-          toast(`[NETWORK] NODE PINGED: ${orchestrator.id.toUpperCase()}`, 'success');
+          toast(copy.toasts.networkPing.replace('{name}', orchestrator.name), 'success');
         }}
         className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold border-t border-black/10 dark:border-white/10 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-black dark:text-white"
       >
@@ -74,6 +74,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
 export default function NetworkPage() {
   const { role } = useAuth();
   const copy = getRoleCopy(role);
+  const orchestrators = orchestratorsByRole[role];
 
   return (
     <div className="min-h-screen bg-brandGray-100 dark:bg-brandGray-975 pt-32 pb-32 px-6 md:px-12 font-sans">

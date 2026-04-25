@@ -5,13 +5,15 @@ import { useAuth } from '@/components/Auth';
 import { useData } from '@/components/DataContext';
 import { useToast } from '@/components/Toast';
 import { ExperiencePost } from '@/types';
+import { getRoleCopy } from '@/lib/roleCopy';
 
 export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [content, setContent] = useState('');
   const [tagsInput, setTagsInput] = useState('');
-  const { isRegistered } = useAuth();
+  const { isRegistered, role } = useAuth();
   const { broadcastPost } = useData();
   const { toast } = useToast();
+  const copy = getRoleCopy(role);
 
   if (!isOpen) return null;
 
@@ -20,7 +22,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
     if (!content.trim()) return;
 
     if (!isRegistered) {
-      toast('[ERROR] UNAUTHORIZED. CANNOT BROADCAST.', 'warning');
+      toast(copy.toasts.broadcastError, 'warning');
       return;
     }
 
@@ -38,7 +40,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
     };
 
     broadcastPost(newPost);
-    toast('[SYSTEM] NODE BROADCASTED TO NETWORK', 'success');
+    toast(copy.toasts.broadcastSuccess, 'success');
     setContent('');
     setTagsInput('');
     onClose();
@@ -49,7 +51,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
       <div className="bg-white dark:bg-black w-full max-w-2xl border border-black/10 dark:border-white/10 shadow-2xl">
         <div className="border-b border-black/10 dark:border-white/10 p-4 flex justify-between items-center bg-brandGray-50 dark:bg-brandGray-950">
           <div className="font-mono text-[11px] uppercase font-bold tracking-[0.2em] text-black/40 dark:text-white/40">
-            Broadcast Protocol // Active
+            {copy.initHeading} {/* Active */}
           </div>
           <button onClick={onClose} className="hover:opacity-50 font-mono text-[11px] uppercase tracking-widest opacity-40">
             Close [X]
@@ -91,7 +93,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               type="submit"
               className="font-mono px-8 py-3 bg-black text-white dark:bg-white dark:text-black text-xs uppercase font-bold tracking-widest hover:opacity-80 transition-all shadow-elegant dark:shadow-elegant-dark"
             >
-              Broadcast Node
+              {copy.initBroadcast}
             </button>
           </div>
         </form>

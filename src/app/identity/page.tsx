@@ -16,19 +16,19 @@ export default function IdentityPage() {
         <div className="max-w-md w-full border-double border-4 border-white bg-black p-8 md:p-12">
           <div className="font-mono text-white text-xs font-bold uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-2 h-2 bg-white animate-pulse"></span>
-            [SYSTEM ERROR] UNREGISTERED NODE
+            {copy.workbenchUnauthorizedHeading}
           </div>
           <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
             Access Denied
           </h1>
           <p className="text-white/60 mb-8 font-mono italic text-lg border-l-2 border-white/30 pl-4">
-            &quot;The identity matrix is locked. You must initialize your digital presence to view this sector.&quot;
+            &quot;{copy.workbenchUnauthorized}&quot;
           </p>
           <button 
             onClick={login}
             className="font-mono w-full bg-white text-black font-bold uppercase tracking-[0.3em] text-[11px] py-4 hover:invert transition-colors"
           >
-            Initialize Identity
+            {copy.identityAction}
           </button>
         </div>
       </div>
@@ -137,7 +137,7 @@ export default function IdentityPage() {
             onClick={handleLogout}
             className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-black/10 dark:border-white/10 px-8 py-4 transition-all"
           >
-            [TERMINATE CONNECTION]
+            {copy.toasts.logout}
           </button>
         </div>
 

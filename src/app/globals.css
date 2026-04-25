@@ -4,6 +4,19 @@
   --font-brand: var(--font-pacifico), cursive;
   --font-sans: var(--font-inter), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
+  
+  --color-brandGray-50: #FCFCFC;
+  --color-brandGray-100: #F9F9F9;
+  --color-brandGray-200: #EEEEEE;
+  --color-brandGray-300: #E0E0E0;
+  --color-brandGray-400: #BDBDBD;
+  --color-brandGray-500: #9E9E9E;
+  --color-brandGray-600: #757575;
+  --color-brandGray-700: #616161;
+  --color-brandGray-800: #424242;
+  --color-brandGray-900: #111111;
+  --color-brandGray-950: #0a0a0a;
+  --color-brandGray-975: #050505;
 }
 
 @custom-variant dark (&:is(.dark *));

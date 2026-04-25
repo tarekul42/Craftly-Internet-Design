@@ -13,6 +13,8 @@ import { getRoleCopy } from '@/lib/roleCopy';
 const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
   const isProject = item.originalPost.type === 'project';
   const projectPost = item.originalPost.type === 'project' ? item.originalPost : null;
+  const { role } = useAuth();
+  const copy = getRoleCopy(role);
   const { toast } = useToast();
   
   return (
@@ -54,7 +56,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
       </div>
 
       <button 
-        onClick={() => toast(`[WORKBENCH] INITIATING INTEGRATION PROTOCOL`, 'info')}
+        onClick={() => toast(copy.toasts.workbenchIntegrate, 'info')}
         className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors bg-brandGray-50 dark:bg-brandGray-950"
       >
         Inspect / Integrate
@@ -90,7 +92,7 @@ export default function WorkbenchPage() {
     <div className="min-h-screen bg-brandGray-100 dark:bg-brandGray-975 pt-32 pb-32 px-6 md:px-12 font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 md:gap-0">
-          <SectionHeader subtitle="User.Workbench" title="Blueprint Archive" />
+          <SectionHeader subtitle={copy.workbench} title="Blueprint Archive" />
           <div className="font-mono text-xs uppercase tracking-widest opacity-60 flex items-center gap-2 text-black dark:text-white">
             <span className="text-lg">⑂</span>
             {workbenchData.length} Forked Nodes

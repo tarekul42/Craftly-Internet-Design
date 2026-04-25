@@ -1,8 +1,10 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { api } from '@/services/api';
 import { FeedPost, WorkbenchItem } from '@/types';
+import { useAuth } from '@/components/Auth';
+import { getRoleCopy } from '@/lib/roleCopy';
+import { feedDataByRole, workbenchDataByRole } from '@/data/mockData';
 
 interface DataContextType {
   feedData: FeedPost[];
@@ -14,35 +16,38 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export function DataProvider({ children }: { children: ReactNode }) {
+  const { role } = useAuth();
+  const copy = getRoleCopy(role);
+  
   const [feedData, setFeedData] = useState<FeedPost[]>([]);
   const [workbenchData, setWorkbenchData] = useState<WorkbenchItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [prevRole, setPrevRole] = useState(role);
+
+  if (role !== prevRole) {
+    setPrevRole(role);
+    setIsInitialized(false);
+  }
 
   useEffect(() => {
     let mounted = true;
     
-    async function loadData() {
-      try {
-        const [feed, workbench] = await Promise.all([
-          api.getFeed(),
-          api.getWorkbench()
-        ]);
-        
-        if (mounted) {
-          setFeedData(feed);
-          setWorkbenchData(workbench);
-          setIsInitialized(true);
-        }
-      } catch (error) {
-        console.error("Failed to load initial data:", error);
-        setIsInitialized(true); // Still initialize to not block app
+    // Simulate loading role-specific data
+    const loadData = () => {
+      if (mounted) {
+        setFeedData(feedDataByRole[role]);
+        setWorkbenchData(workbenchDataByRole[role]);
+        setIsInitialized(true);
       }
-    }
+    };
     
-    loadData();
+    const timer = setTimeout(loadData, 800);
     
-    return () => { mounted = false; };
-  }, []);
+    return () => { 
+      mounted = false;
+      clearTimeout(timer);
+    };
+  }, [role]);
 
   const forkPost = (post: FeedPost) => {
     const isAlreadyForked = workbenchData.some(item => item.originalPost.id === post.id);
@@ -58,13 +63,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
     
     const updated = [newItem, ...workbenchData];
     setWorkbenchData(updated);
-    localStorage.setItem('craftly_workbench', JSON.stringify(updated));
   };
 
   const broadcastPost = (post: FeedPost) => {
     const updated = [post, ...feedData];
     setFeedData(updated);
-    localStorage.setItem('craftly_feed', JSON.stringify(updated));
   };
 
   if (!isInitialized) {
@@ -75,7 +78,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
             <div className="w-3 h-3 bg-black dark:bg-white animate-pulse"></div>
           </div>
           <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-black/40 dark:text-white/40 animate-pulse">
-            Initializing Console...
+            {copy.toasts.loadingState}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useToast } from '@/components/Toast';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/Auth';
 import { useData } from '@/components/DataContext';
+import { getRoleCopy } from '@/lib/roleCopy';
 
 export default function InitNodePage() {
   const [nodeType, setNodeType] = useState<'project' | 'experience'>('experience');
@@ -17,11 +18,7 @@ export default function InitNodePage() {
   const { isRegistered, login, role } = useAuth();
   const { broadcastPost } = useData();
 
-  const roleCopy = {
-    engineer: { action: "Initialize Node", heading: "Initialize Node", broadcast: "Broadcast to Console", section: "System.Execute" },
-    builder: { action: "Publish", heading: "Publish App", broadcast: "Publish to Network", section: "Builder.Publish" },
-    guest: { action: "Initialize Node", heading: "Initialize Node", broadcast: "Broadcast to Console", section: "System.Execute" },
-  }[role];
+  const copy = getRoleCopy(role);
 
   if (!isRegistered) {
     return (
@@ -29,19 +26,19 @@ export default function InitNodePage() {
         <div className="max-w-md w-full border-double border-4 border-white bg-black p-8 md:p-12">
           <div className="font-mono text-white text-xs font-bold uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-2 h-2 bg-white animate-pulse"></span>
-            [SYSTEM ERROR] UNREGISTERED NODE
+            {copy.workbenchUnauthorizedHeading}
           </div>
           <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
             Access Denied
           </h1>
           <p className="text-white/60 mb-8 font-mono italic text-lg border-l-2 border-white/30 pl-4">
-            &quot;The initialization sector is locked. You must establish your digital identity to broadcast logic to the network.&quot;
+            &quot;{copy.workbenchUnauthorized}&quot;
           </p>
           <button 
             onClick={login}
             className="font-mono w-full bg-white text-black font-bold uppercase tracking-[0.3em] text-[11px] py-4 hover:invert transition-colors"
           >
-            Initialize Identity
+            {copy.identityAction}
           </button>
         </div>
       </div>
@@ -95,7 +92,7 @@ export default function InitNodePage() {
       }
 
       setIsBroadcasting(false);
-      toast('[CONSOLE] NODE SUCCESSFULLY BROADCASTED', 'success');
+      toast(copy.toasts.broadcastSuccess, 'success');
       router.push('/');
     }, 1500);
   };
@@ -104,10 +101,10 @@ export default function InitNodePage() {
     <div className="min-h-screen bg-black text-white pt-32 pb-32 px-6 md:px-12 font-sans">
       <div className="max-w-2xl mx-auto">
         <div className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-white/40 mb-4">
-          {roleCopy.section}
+          {copy.initSection}
         </div>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-12">
-          {roleCopy.heading}
+          {copy.initHeading}
         </h1>
         
         <form className="space-y-8" onSubmit={handleSubmit}>
@@ -172,7 +169,7 @@ export default function InitNodePage() {
                 <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
                 Broadcasting...
               </span>
-            ) : roleCopy.broadcast}
+            ) : copy.initBroadcast}
           </button>
         </form>
       </div>

@@ -64,7 +64,7 @@ export default function Home() {
     <div className="flex h-screen bg-white dark:bg-black pt-20 font-sans">
       {/* Left Sidebar (Stream) - 35% */}
       <div className={`w-full md:w-[35%] md:border-r border-black/10 dark:border-white/10 overflow-y-auto custom-scrollbar flex-col ${isMobileCanvasOpen ? 'hidden md:flex' : 'flex'}`}>
-        <div className="p-6 border-b border-black/10 dark:border-white/10 bg-brandGray-50 dark:bg-brandGray-950 sticky top-0 z-10 flex flex-col gap-4">
+        <div className="p-6 border-b border-black/10 dark:border-white/10 bg-brandGray-50/90 dark:bg-brandGray-950/90 backdrop-blur-sm sticky top-0 z-30 flex flex-col gap-4">
           <div className="flex justify-between items-end">
             <div>
               <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-1">
@@ -174,7 +174,7 @@ export default function Home() {
       {/* Right Detail Pane (Canvas) - 65% */}
       <div className={`w-full md:w-[65%] flex-col h-full bg-brandGray-100 dark:bg-brandGray-975 relative overflow-hidden ${isMobileCanvasOpen ? 'flex' : 'hidden md:flex'}`}>
         {/* Top Interaction Bar */}
-        <div className="h-14 border-b border-black/10 dark:border-white/10 bg-white dark:bg-black flex justify-between md:justify-end items-center px-4 md:px-6 sticky top-0 z-20">
+        <div className="h-14 border-b border-black/10 dark:border-white/10 bg-white/90 dark:bg-black/90 backdrop-blur-sm flex justify-between md:justify-end items-center px-4 md:px-6 sticky top-0 z-20">
           <button 
             className="md:hidden font-mono text-[11px] uppercase font-bold tracking-widest flex items-center gap-2"
             onClick={() => setIsMobileCanvasOpen(false)}
@@ -185,10 +185,10 @@ export default function Home() {
             <button 
               onClick={() => {
                 if (!isRegistered) {
-                  toast('[ERROR] UNAUTHORIZED. INITIALIZE IDENTITY.', 'warning');
+                  toast(copy.toasts.unauthorized, 'warning');
                   return;
                 }
-                toast(`[SYSTEM] ACKNOWLEDGED: ${selectedPost.id}`, 'success');
+                toast(copy.toasts.identityInitialized, 'success');
               }}
               className="font-mono text-[11px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity flex items-center gap-1 md:gap-2"
             >
@@ -198,10 +198,11 @@ export default function Home() {
             <button 
               onClick={() => {
                 if (!isRegistered) {
-                  toast('[ERROR] UNAUTHORIZED. INITIALIZE IDENTITY.', 'warning');
+                  toast(copy.toasts.unauthorized, 'warning');
                   return;
                 }
-                toast(`[SYSTEM] INITIATING ${copy.audit.toUpperCase()}...`, 'info');
+                const displayName = selectedPost.type === 'project' ? selectedPost.name : selectedPost.creator;
+                toast(copy.toasts.auditComplete.replace('{name}', displayName), 'info');
               }}
               className="font-mono text-[11px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity flex items-center gap-1 md:gap-2"
             >
@@ -214,11 +215,11 @@ export default function Home() {
                   onClick={() => {
                     if (isAlreadyForked) return;
                     if (!isRegistered) {
-                      toast('[ERROR] UNAUTHORIZED. INITIALIZE IDENTITY.', 'warning');
+                      toast(copy.toasts.unauthorized, 'warning');
                       return;
                     }
                     forkPost(selectedPost);
-                    toast(`[WORKBENCH] NODE FORKED AND SAVED`, 'success');
+                    toast(copy.toasts.workbenchSave, 'success');
                   }}
                   disabled={isAlreadyForked}
                   className={`font-mono text-[11px] font-bold uppercase tracking-widest transition-all flex items-center gap-1 md:gap-2 ${isAlreadyForked ? 'opacity-100 bg-black text-white dark:bg-white dark:text-black px-2 py-1' : 'opacity-40 hover:opacity-100'}`}
@@ -235,7 +236,7 @@ export default function Home() {
           {selectedPost.type === 'experience' ? (
             <div className="max-w-3xl mx-auto py-12 md:pt-24 md:pb-32 px-6 md:px-12">
                <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-8 md:mb-12">
-                 Developer Log // {selectedPost.id}
+                 {copy.toasts.postDetail.replace('{id}', selectedPost.id)}
                </div>
                
                <div className="flex items-center gap-4 mb-8 md:mb-12 border-b border-black/5 dark:border-white/5 pb-6 md:pb-8">

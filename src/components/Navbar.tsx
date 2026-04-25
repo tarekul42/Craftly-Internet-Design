@@ -81,7 +81,7 @@ const Navbar = () => {
               </>
             ) : (
               <button onClick={login} className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all border border-black dark:border-white px-6 py-3 whitespace-nowrap">
-                Initialize Identity
+                {labels.identityAction}
               </button>
             )}
           </div>
@@ -128,7 +128,7 @@ const Navbar = () => {
             </button>
           ) : (
             <button onClick={() => { login(); setIsMenuOpen(false); }} className="font-mono text-xs uppercase tracking-[0.2em] font-bold bg-black text-white dark:bg-white dark:text-black px-8 py-4">
-              Initialize Identity
+              {labels.identityAction}
             </button>
           )}
         </div>

@@ -46,13 +46,13 @@ export function CommandPalette() {
     { id: 'nav-home', label: `Go to ${copy.home || 'Home'}`, action: () => router.push('/') },
     { id: 'nav-network', label: `Go to ${copy.networkTitle}`, action: () => router.push('/network') },
     { id: 'nav-workbench', label: `Go to ${copy.workbench || 'Workbench'}`, action: () => router.push('/workbench') },
-    { id: 'auth-login', label: isRegistered ? 'Identity: Active' : 'Initialize Identity', action: () => { if(!isRegistered) { login(); toast('[SYSTEM] IDENTITY INITIALIZED', 'success'); } } },
-    { id: 'theme-toggle', label: `Toggle Theme (${isDark ? 'Dark' : 'Light'})`, action: () => { toggleTheme(); toast('[SYSTEM] THEME INVERTED', 'info'); } },
+    { id: 'auth-login', label: isRegistered ? 'Identity: Active' : copy.identityAction, action: () => { if(!isRegistered) { login(); toast(copy.toasts.identityInitialized, 'success'); } } },
+    { id: 'theme-toggle', label: `Toggle Theme (${isDark ? 'Dark' : 'Light'})`, action: () => { toggleTheme(); toast(copy.toasts.themeInverted, 'info'); } },
   ];
 
   // Only engineers get the "Ping" command
   if (role === 'engineer') {
-    commands.push({ id: 'action-ping', label: 'Ping Global Nodes', action: () => toast('[NETWORK] PINGING ALL ACTIVE NODES...', 'info') });
+    commands.push({ id: 'action-ping', label: copy.networkAction + ' (All)', action: () => toast(copy.toasts.networkPingAll, 'info') });
   }
 
   const filteredCommands = commands.filter(cmd => cmd.label.toLowerCase().includes(query.toLowerCase()));
