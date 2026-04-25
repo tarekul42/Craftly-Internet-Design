@@ -436,6 +436,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "Julian",
     specialty: "Spatial Architect & Vibe Translation",
     status: "active",
+    role: "engineer",
     metrics: { nodesBroadcasted: 42, forkRate: 850 }
   },
   {
@@ -444,6 +445,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "E. Rossi",
     specialty: "High-Stakes Data Pipelines & Zero-UI",
     status: "active",
+    role: "builder",
     metrics: { nodesBroadcasted: 18, forkRate: 1205 }
   },
   {
@@ -452,6 +454,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "M.Thorne",
     specialty: "Algorithmic Aesthetics & Motion",
     status: "dormant",
+    role: "guest",
     metrics: { nodesBroadcasted: 8, forkRate: 340 }
   },
   {
@@ -460,7 +463,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "S.Chen",
     specialty: "Edge-Compute & Build-Time Inference",
     status: "active",
-    role: "lead",
+    role: "engineer",
     metrics: { nodesBroadcasted: 56, forkRate: 2100 }
   },
   {
@@ -469,6 +472,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "D.Kim",
     specialty: "Component Governance & Systems",
     status: "active",
+    role: "builder",
     metrics: { nodesBroadcasted: 112, forkRate: 450 }
   },
   {
@@ -477,6 +481,7 @@ export const orchestrators: Orchestrator[] = [
     signature: "A.Riv",
     specialty: "Middleware Reduction & Stateless Auth",
     status: "active",
+    role: "guest",
     metrics: { nodesBroadcasted: 24, forkRate: 670 }
   }
 ];

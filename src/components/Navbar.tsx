@@ -16,8 +16,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBroadcastOpen, setIsBroadcastOpen] = useState(false);
   const pathname = usePathname();
-  const { isRegistered, login } = useAuth();
+  const { isRegistered, role, login } = useAuth();
   const { isDark, toggleTheme } = useTheme();
+
+  const labels = {
+    engineer: { home: 'Console', network: 'Network', workbench: 'Workbench', action: 'Broadcast' },
+    builder: { home: 'Dashboard', network: 'Community', workbench: 'Studio', action: 'Publish' },
+    guest: { home: 'Explore', network: 'People', workbench: 'Bookmarks', action: 'Join' },
+  }[role];
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -48,13 +54,13 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-8 items-center text-black dark:text-white">
           <Link href="/" className={`${mono.className} text-[10px] uppercase tracking-[0.3em] font-bold hover:opacity-50 transition-opacity whitespace-nowrap ${isActive('/') ? 'border-b-2 border-black dark:border-white pb-1' : 'border-b-2 border-transparent pb-1'}`}>
-            Console
+            {labels.home}
           </Link>
           <Link href="/network" className={`${mono.className} text-[10px] uppercase tracking-[0.3em] font-bold hover:opacity-50 transition-opacity whitespace-nowrap ${isActive('/network') ? 'border-b-2 border-black dark:border-white pb-1' : 'border-b-2 border-transparent pb-1'}`}>
-            Network
+            {labels.network}
           </Link>
           <Link href="/workbench" className={`${mono.className} text-[10px] uppercase tracking-[0.3em] font-bold hover:opacity-50 transition-opacity whitespace-nowrap ${isActive('/workbench') ? 'border-b-2 border-black dark:border-white pb-1' : 'border-b-2 border-transparent pb-1'}`}>
-            Workbench
+            {labels.workbench}
           </Link>
           {isRegistered && (
             <Link href="/identity" className={`${mono.className} text-[10px] uppercase tracking-[0.3em] font-bold hover:opacity-50 transition-opacity whitespace-nowrap ${isActive('/identity') ? 'border-b-2 border-black dark:border-white pb-1' : 'border-b-2 border-transparent pb-1'}`}>
@@ -77,7 +83,7 @@ const Navbar = () => {
                   onClick={() => setIsBroadcastOpen(true)}
                   className={`${mono.className} text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all border border-black dark:border-white px-4 py-2 flex items-center gap-2 whitespace-nowrap`}
                 >
-                  <span className="text-lg leading-none mt-[-2px]">+</span> Broadcast
+                  <span className="text-lg leading-none mt-[-2px]">+</span> {labels.action}
                 </button>
               </>
             ) : (
@@ -108,13 +114,13 @@ const Navbar = () => {
       <div className={`fixed inset-0 bg-white dark:bg-black z-40 transition-transform duration-500 ease-in-out flex flex-col justify-center items-center lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col space-y-12 items-center text-center">
           <Link href="/" onClick={() => setIsMenuOpen(false)} className={`${mono.className} text-sm uppercase tracking-[0.4em] font-bold hover:opacity-50 ${isActive('/') ? 'text-black dark:text-white' : 'text-black/50 dark:text-white/50'}`}>
-            Console
+            {labels.home}
           </Link>
           <Link href="/network" onClick={() => setIsMenuOpen(false)} className={`${mono.className} text-sm uppercase tracking-[0.4em] font-bold hover:opacity-50 ${isActive('/network') ? 'text-black dark:text-white' : 'text-black/50 dark:text-white/50'}`}>
-            Network
+            {labels.network}
           </Link>
           <Link href="/workbench" onClick={() => setIsMenuOpen(false)} className={`${mono.className} text-sm uppercase tracking-[0.4em] font-bold hover:opacity-50 ${isActive('/workbench') ? 'text-black dark:text-white' : 'text-black/50 dark:text-white/50'}`}>
-            Workbench
+            {labels.workbench}
           </Link>
           {isRegistered && (
             <Link href="/identity" onClick={() => setIsMenuOpen(false)} className={`${mono.className} text-sm uppercase tracking-[0.4em] font-bold hover:opacity-50 ${isActive('/identity') ? 'text-black dark:text-white' : 'text-black/50 dark:text-white/50'}`}>
@@ -125,7 +131,7 @@ const Navbar = () => {
           
           {isRegistered ? (
             <button onClick={() => { setIsBroadcastOpen(true); setIsMenuOpen(false); }} className={`${mono.className} text-xs uppercase tracking-[0.3em] font-bold bg-black text-white dark:bg-white dark:text-black px-8 py-4`}>
-              Broadcast Node
+              {labels.action} Node
             </button>
           ) : (
             <button onClick={() => { login(); setIsMenuOpen(false); }} className={`${mono.className} text-xs uppercase tracking-[0.3em] font-bold bg-black text-white dark:bg-white dark:text-black px-8 py-4`}>

@@ -20,7 +20,13 @@ export default function Home() {
   const [query, setQuery] = useState('');
   
   const { toast } = useToast();
-  const { isRegistered } = useAuth();
+  const { isRegistered, role } = useAuth();
+
+  const roleCopy = {
+    engineer: { title: "The Orchestrator's Console", search: "type:project tags:auth metrics.forks>100", audit: "Audit", fork: "Fork", forked: "Forked" },
+    builder: { title: "The Builder's Dashboard", search: "Search apps, categories, or metrics...", audit: "Optimize", fork: "Clone", forked: "Cloned" },
+    guest: { title: "Explore Craftly Internet", search: "Search by need (e.g., 'minimal portfolio')...", audit: "Rate", fork: "Save", forked: "Saved" },
+  }[role];
 
   useEffect(() => {
     if (!selectedPost && feedData.length > 0) {
@@ -69,7 +75,7 @@ export default function Home() {
           <div className="flex justify-between items-end">
             <div>
               <h2 className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 dark:text-white/40 mb-1`}>
-                The Orchestrator&apos;s Console
+                {roleCopy.title}
               </h2>
               <div className="flex gap-4 items-center">
                 <button 
@@ -97,7 +103,7 @@ export default function Home() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="type:project tags:auth metrics.forks>100"
+              placeholder={roleCopy.search}
               className={`${mono.className} w-full bg-white dark:bg-black border border-black/20 dark:border-white/20 p-2 pl-8 text-[10px] uppercase tracking-widest focus:outline-none focus:border-black dark:focus:border-white transition-colors placeholder:opacity-30`}
             />
           </div>
@@ -128,8 +134,8 @@ export default function Home() {
                           <span className={`${mono.className} text-[7px] bg-black text-white dark:bg-white dark:text-black px-1 py-0.5 rounded-sm font-black`}>LEAD</span>
                         )}
                       </div>
-                      <div className={`${mono.className} text-[9px] opacity-50 mt-1 uppercase`}>
-                        {post.type} {'//'} {post.id.padStart(3, '0')}
+                      <div className={`${mono.className} text-[9px] opacity-50 mt-1`}>
+                        {post.type.charAt(0).toUpperCase() + post.type.slice(1)} {'//'} {post.id.padStart(3, '0')}
                       </div>
                     </div>
                   </div>
@@ -202,11 +208,11 @@ export default function Home() {
                   toast('[ERROR] UNAUTHORIZED. INITIALIZE IDENTITY.', 'warning');
                   return;
                 }
-                toast(`[SYSTEM] INITIATING AUDIT...`, 'info');
+                toast(`[SYSTEM] INITIATING ${roleCopy.audit.toUpperCase()}...`, 'info');
               }}
               className={`${mono.className} text-[10px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity flex items-center gap-1 md:gap-2`}
             >
-              <span className="hidden md:inline-block">[+]</span> Audit
+              <span className="hidden md:inline-block">[+]</span> {roleCopy.audit}
             </button>
             {(() => {
               const isAlreadyForked = isRegistered && workbenchData.some(item => item.originalPost.id === selectedPost.id);
@@ -225,7 +231,7 @@ export default function Home() {
                   className={`${mono.className} text-[10px] font-bold uppercase tracking-widest transition-all flex items-center gap-1 md:gap-2 ${isAlreadyForked ? 'opacity-100 bg-black text-white dark:bg-white dark:text-black px-2 py-1' : 'opacity-40 hover:opacity-100'}`}
                 >
                   <span className="hidden md:inline-block">{isAlreadyForked ? '✓' : '⑂'}</span> 
-                  {isAlreadyForked ? 'Forked' : 'Fork'}
+                  {isAlreadyForked ? roleCopy.forked : roleCopy.fork}
                 </button>
               );
             })()}

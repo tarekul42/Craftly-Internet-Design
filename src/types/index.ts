@@ -56,13 +56,15 @@ export interface ExperiencePost extends BasePost {
 
 export type FeedPost = ProjectPost | ExperiencePost;
 
+export type UserRole = 'engineer' | 'builder' | 'guest';
+
 export interface Orchestrator {
   id: string;
   name: string;
   signature: string;
   specialty: string;
   status: 'active' | 'dormant';
-  role?: 'lead' | 'member';
+  role: UserRole;
   metrics: {
     nodesBroadcasted: number;
     forkRate: number;

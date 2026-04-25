@@ -19,13 +19,13 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
   const { toast } = useToast();
   
   return (
-    <div className="border border-black dark:border-white bg-white dark:bg-black flex flex-col group hover:shadow-[8px_8px_0_0_#000] dark:hover:shadow-[8px_8px_0_0_#fff] hover:-translate-y-1 hover:-translate-x-1 transition-all duration-300 overflow-hidden">
+    <div className="border border-black dark:border-white bg-white dark:bg-black flex flex-col group hover:shadow-[4px_4px_0_0_#000] dark:hover:shadow-[4px_4px_0_0_#fff] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-500 overflow-hidden">
       <div className="p-4 border-b border-black dark:border-white flex justify-between items-center bg-black dark:bg-white text-white dark:text-black">
         <div className="flex items-center gap-2">
           <span className={`${mono.className} text-[9px] uppercase tracking-widest`}>
             {item.status}
           </span>
-          {item.status === 'integrating' && <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>}
+          {item.status === 'integrating' && <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>}
         </div>
         <div suppressHydrationWarning className={`${mono.className} text-[9px] opacity-70`}>
           Forked: {new Date(item.forkedAt).toLocaleDateString()}
@@ -50,9 +50,9 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
           </div>
         )}
 
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-2 border-yellow-400 dark:border-yellow-600 p-4">
+        <div className="bg-black dark:bg-white text-white dark:text-black p-4 border border-white dark:border-black">
           <div className={`${mono.className} text-[9px] uppercase tracking-widest opacity-60 mb-1`}>Private Note</div>
-          <p className="text-sm font-serif italic text-black/80 dark:text-white/80">{item.notes}</p>
+          <p className="text-sm font-serif italic">{item.notes}</p>
         </div>
       </div>
 
@@ -73,15 +73,15 @@ export default function WorkbenchPage() {
   if (!isRegistered) {
     return (
       <div className={`min-h-screen bg-black pt-32 pb-32 px-6 md:px-12 flex items-center justify-center ${inter.className}`}>
-        <div className="border border-red-500/30 bg-red-500/5 p-12 max-w-2xl w-full text-center flex flex-col items-center">
-          <div className={`${mono.className} text-red-500 text-6xl mb-6`}>!</div>
-          <h2 className={`${mono.className} text-red-500 font-bold tracking-widest uppercase mb-4`}>
+        <div className="border-double border-4 border-white bg-black/5 p-12 max-w-2xl w-full text-center flex flex-col items-center">
+          <div className={`${mono.className} text-white text-6xl mb-6`}>!</div>
+          <h2 className={`${mono.className} text-white font-bold tracking-widest uppercase mb-4`}>
             [SYSTEM ERROR] UNREGISTERED NODE
           </h2>
           <p className="text-white/60 font-serif italic mb-12">
             The private sector is restricted to registered Orchestrators. You must initialize an identity to establish a Workbench and fork logic from the network.
           </p>
-          <Button variant="danger" onClick={login}>
+          <Button variant="outline" onClick={login} className="text-white border-white hover:bg-white hover:text-black">
             Initialize Identity
           </Button>
         </div>

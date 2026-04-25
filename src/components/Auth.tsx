@@ -1,23 +1,30 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { UserRole } from '@/types';
 
 interface AuthContextType {
   isRegistered: boolean;
+  role: UserRole;
   login: () => void;
   logout: () => void;
+  setRole: (role: UserRole) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isRegistered, setIsRegistered] = useState(false);
+  const [role, setRoleState] = useState<UserRole>('engineer');
 
   useEffect(() => {
     const stored = localStorage.getItem('craftly_auth');
+    const storedRole = localStorage.getItem('craftly_role') as UserRole;
     if (stored === 'true') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsRegistered(true);
+      setIsRegistered(true); // eslint-disable-line react-hooks/set-state-in-effect
+    }
+    if (storedRole) {
+      setRoleState(storedRole);  
     }
   }, []);
 
@@ -31,8 +38,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('craftly_auth', 'false');
   };
 
+  const setRole = (newRole: UserRole) => {
+    setRoleState(newRole);
+    localStorage.setItem('craftly_role', newRole);
+  };
+
   return (
-    <AuthContext.Provider value={{ isRegistered, login, logout }}>
+    <AuthContext.Provider value={{ isRegistered, role, login, logout, setRole }}>
       {children}
     </AuthContext.Provider>
   );

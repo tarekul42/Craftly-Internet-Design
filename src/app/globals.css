@@ -74,3 +74,13 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--foreground);
 }
+
+/* Rule 1: Enforce grayscale imagery */
+img {
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+img:hover {
+  filter: grayscale(0%);
+}
