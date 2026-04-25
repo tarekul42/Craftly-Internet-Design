@@ -1,0 +1,75 @@
+'use client';
+
+import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import { JetBrains_Mono } from 'next/font/google';
+
+const mono = JetBrains_Mono({ subsets: ['latin'] });
+
+type ToastType = 'success' | 'info' | 'warning';
+
+interface Toast {
+  id: string;
+  message: string;
+  type: ToastType;
+}
+
+interface ToastContextType {
+  toast: (message: string, type?: ToastType) => void;
+}
+
+const ToastContext = createContext<ToastContextType | undefined>(undefined);
+
+export const ToastProvider = ({ children }: { children: ReactNode }) => {
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  const toast = useCallback((message: string, type: ToastType = 'info') => {
+    const id = Math.random().toString(36).substring(2, 9);
+    setToasts((prev) => [...prev, { id, message, type }]);
+
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 3000);
+  }, []);
+
+  return (
+    <ToastContext.Provider value={{ toast }}>
+      {children}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none">
+        {toasts.map((t) => (
+          <div 
+            key={t.id}
+            className={`animate-slide-up-fade px-6 py-4 border ${t.type === 'success' ? 'bg-green-500 text-black border-black' : 'bg-black text-white border-white/20'} shadow-[4px_4px_0_0_rgba(0,0,0,0.2)]`}
+          >
+            <div className={`${mono.className} text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-3`}>
+              <span className={`w-2 h-2 rounded-full ${t.type === 'success' ? 'bg-black' : 'bg-white animate-pulse'}`}></span>
+              {t.message}
+            </div>
+          </div>
+        ))}
+      </div>
+      <style jsx global>{`
+        @keyframes slide-up-fade {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-slide-up-fade {
+          animation: slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}</style>
+    </ToastContext.Provider>
+  );
+};
+
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  return context;
+};
