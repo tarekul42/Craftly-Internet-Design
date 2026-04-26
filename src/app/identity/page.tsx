@@ -48,7 +48,7 @@ export default function IdentityPage() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-black/10 pb-8 md:pb-12 mb-8 md:mb-12">
           <div className="flex items-center gap-6">
             <div className="w-20 h-20 md:w-24 md:h-24 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-4xl md:text-5xl flex-shrink-0">
-              U
+              {copy.broadcastCreator.charAt(0).toUpperCase()}
             </div>
             <div>
               <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">

@@ -185,7 +185,7 @@ export default function Home() {
             className="md:hidden font-mono text-[11px] uppercase font-bold tracking-widest flex items-center gap-2"
             onClick={() => setIsMobileCanvasOpen(false)}
           >
-            ← Back
+            {copy.mobileBack}
           </button>
           <div className="flex gap-4 md:gap-6">
             <button 

@@ -121,6 +121,7 @@ export const roleCopy = {
     closeModal: "Close [X]",
     cancel: "Cancel",
     escToClose: "ESC to close",
+    mobileBack: "< SYSTEM",
   },
   builder: {
     home: "Dashboard",
@@ -237,6 +238,7 @@ export const roleCopy = {
     closeModal: "Close",
     cancel: "Cancel",
     escToClose: "ESC to close",
+    mobileBack: "< Back",
   },
   guest: {
     home: "Explore",
@@ -352,6 +354,7 @@ export const roleCopy = {
     closeModal: "Close",
     cancel: "Cancel",
     escToClose: "ESC to close",
+    mobileBack: "< Back",
   },
 } as const satisfies Record<UserRole, Record<string, string | Record<string, string>>>;
 
