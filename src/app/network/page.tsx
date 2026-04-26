@@ -49,7 +49,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
           <div>
             <div className="font-mono text-[11px] uppercase opacity-50 mb-1">{copy.networkMetric2}</div>
             <div className="font-bold text-xl font-mono flex items-center gap-1">
-              <span className="text-sm opacity-50">⑂</span> {orchestrator.metrics.forkRate}
+              <span className="text-sm opacity-50">{copy.forkIcon}</span> {orchestrator.metrics.forkRate}
             </div>
           </div>
         </div>

@@ -41,17 +41,17 @@ export default function IdentityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-20 font-sans">
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white pt-20 font-sans">
       <div className="max-w-4xl mx-auto p-6 md:p-12">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-black/10 pb-8 md:pb-12 mb-8 md:mb-12">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-black text-white flex items-center justify-center font-bold text-4xl md:text-5xl flex-shrink-0">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-4xl md:text-5xl flex-shrink-0">
               U
             </div>
             <div>
-              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-2">
+              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
                 {copy.identitySubtitle}
               </h2>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-none">
@@ -66,8 +66,8 @@ export default function IdentityPage() {
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="border border-black/10 p-6 md:p-8 bg-brandGray-50">
-            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-4">
+          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950">
+            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-4">
               {copy.identityMetric1Label}
             </div>
             <div className="text-4xl md:text-5xl font-mono font-bold flex items-center gap-3">
@@ -75,8 +75,8 @@ export default function IdentityPage() {
             </div>
           </div>
           
-          <div className="border border-black/10 p-6 md:p-8 bg-brandGray-50">
-            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-4">
+          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950">
+            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-4">
               {copy.identityMetric2Label}
             </div>
             <div className="text-4xl md:text-5xl font-mono font-bold">
@@ -84,8 +84,8 @@ export default function IdentityPage() {
             </div>
           </div>
 
-          <div className="border border-black/10 p-6 md:p-8 bg-brandGray-50">
-            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-4">
+          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950">
+            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-4">
               {copy.identityMetric3Label}
             </div>
             <div className="text-4xl md:text-5xl font-mono font-bold flex items-center gap-3">
@@ -95,8 +95,8 @@ export default function IdentityPage() {
         </div>
 
         {/* Role Selection */}
-        <div className="mb-12 border border-black/10 p-8 bg-brandGray-50">
-          <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mb-6">
+        <div className="mb-12 border border-black/10 dark:border-white/10 p-8 bg-brandGray-50 dark:bg-brandGray-950">
+          <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-6">
             {copy.switchMode}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,7 +104,7 @@ export default function IdentityPage() {
               <button
                 key={r}
                 onClick={() => setRole(r)}
-                className={`font-mono text-[11px] uppercase tracking-[0.2em] font-bold py-4 border transition-all ${role === r ? 'bg-black text-white border-black' : 'bg-transparent text-black border-black/10 hover:border-black'}`}
+                className={`font-mono text-[11px] uppercase tracking-[0.2em] font-bold py-4 border transition-all ${role === r ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white' : 'bg-transparent text-black dark:text-white border-black/10 dark:border-white/10 hover:border-black dark:hover:border-white'}`}
               >
                 {r.toUpperCase()}
               </button>
@@ -115,18 +115,18 @@ export default function IdentityPage() {
         <div className="mb-24">
           <Link 
             href="/init"
-            className="group block border border-black/10 p-8 md:p-12 hover:bg-black transition-colors shadow-elegant"
+            className="group block border border-black/10 dark:border-white/10 p-8 md:p-12 hover:bg-black dark:hover:bg-white transition-colors shadow-elegant dark:shadow-elegant-dark"
           >
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold uppercase group-hover:text-white transition-colors">
+                <h3 className="text-2xl md:text-3xl font-bold uppercase group-hover:text-white dark:group-hover:text-black transition-colors">
                   + {copy.identityAction}
                 </h3>
-                <p className="font-mono text-xs uppercase tracking-widest opacity-50 group-hover:text-white/70 mt-2">
+                <p className="font-mono text-xs uppercase tracking-widest opacity-50 group-hover:text-white/70 dark:group-hover:text-black/70 mt-2">
                   {copy.identityActionDesc}
                 </p>
               </div>
-              <div className="text-4xl group-hover:text-white transition-colors hidden md:block">→</div>
+              <div className="text-4xl group-hover:text-white dark:group-hover:text-black transition-colors hidden md:block">→</div>
             </div>
           </Link>
         </div>

@@ -46,7 +46,7 @@ export function CommandPalette() {
     { id: 'nav-home', label: `Go to ${copy.home || 'Home'}`, action: () => router.push('/') },
     { id: 'nav-network', label: `Go to ${copy.networkTitle}`, action: () => router.push('/network') },
     { id: 'nav-workbench', label: `Go to ${copy.workbench || 'Workbench'}`, action: () => router.push('/workbench') },
-    { id: 'auth-login', label: isRegistered ? 'Identity: Active' : copy.identityAction, action: () => { if(!isRegistered) { login(); toast(copy.toasts.identityInitialized, 'success'); } } },
+    { id: 'auth-login', label: isRegistered ? copy.identityActive : copy.identityAction, action: () => { if(!isRegistered) { login(); toast(copy.toasts.identityInitialized, 'success'); } } },
     { id: 'theme-toggle', label: `Toggle Theme (${isDark ? 'Dark' : 'Light'})`, action: () => { toggleTheme(); toast(copy.toasts.themeInverted, 'info'); } },
   ];
 
@@ -65,7 +65,7 @@ export function CommandPalette() {
   return (
     <div className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-[2px] flex items-start justify-center pt-[20vh]" onClick={() => setIsOpen(false)}>
       <div 
-        className="w-full max-w-xl bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-2xl flex flex-col mx-4"
+        className="w-full max-w-xl bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-elegant dark:shadow-elegant-dark flex flex-col mx-4"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center border-b border-black/10 dark:border-white/10 px-6 py-5">
@@ -75,11 +75,11 @@ export function CommandPalette() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search commands..."
+            placeholder={copy.commandSearchPlaceholder}
             className="font-mono flex-1 bg-transparent border-none outline-none text-black dark:text-white uppercase tracking-[0.1em] text-sm placeholder-black/20 dark:placeholder-white/20"
           />
           <div className="font-mono text-[10px] text-black/40 dark:text-white/40 bg-black/5 dark:bg-white/10 px-2 py-1 rounded-sm uppercase tracking-tighter">
-            ESC to close
+            {copy.escToClose}
           </div>
         </div>
         <div className="max-h-[50vh] overflow-y-auto custom-scrollbar py-2">
@@ -96,7 +96,7 @@ export function CommandPalette() {
             ))
           ) : (
             <div className="font-mono text-center py-12 text-black/40 dark:text-white/40 uppercase tracking-widest text-xs">
-              No commands found
+              {copy.commandNoResults}
             </div>
           )}
         </div>

@@ -1,24 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { useToast } from '@/components/Toast';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/Auth';
-import { useData } from '@/components/DataContext';
-import { getRoleCopy } from '@/lib/roleCopy';
+import { useBroadcastForm } from '@/hooks/useBroadcastForm';
 
 export default function InitNodePage() {
   const [nodeType, setNodeType] = useState<'project' | 'experience'>('experience');
-  const [content, setContent] = useState('');
-  const [tags, setTags] = useState('');
-  const [isBroadcasting, setIsBroadcasting] = useState(false);
   
-  const { toast } = useToast();
   const router = useRouter();
-  const { isRegistered, login, role } = useAuth();
-  const { broadcastPost } = useData();
-
-  const copy = getRoleCopy(role);
+  const { isRegistered, login } = useAuth();
+  
+  const { content, setContent, tagsInput, setTagsInput, isBroadcasting, handleSubmit, copy } = useBroadcastForm(() => router.push('/'));
 
   if (!isRegistered) {
     return (
@@ -45,78 +38,30 @@ export default function InitNodePage() {
     );
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!content.trim()) return;
-
-    setIsBroadcasting(true);
-    
-    const tagsArray = tags.split(',').map(t => t.trim()).filter(Boolean);
-
-    // Simulate network delay
-    setTimeout(() => {
-      const basePost = {
-        id: `${nodeType.charAt(0)}-${Date.now()}`,
-        creator: copy.broadcastCreator,
-        signature: 'Local',
-        timestamp: new Date().toISOString(),
-        metrics: { acknowledgements: 0, audits: 0, forks: 0 }
-      };
-
-      if (nodeType === 'experience') {
-        broadcastPost({
-          ...basePost,
-          type: 'experience',
-          content: content.trim(),
-          tags: tagsArray.length > 0 ? tagsArray : ['log']
-        });
-      } else {
-        broadcastPost({
-          ...basePost,
-          type: 'project',
-          name: copy.broadcastProjectName,
-          tagline: copy.broadcastProjectTag,
-          description: content.trim(),
-          heroImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80',
-          caseStudy: {
-            problem: copy.broadcastProblem,
-            solution: content.trim(),
-            impact: copy.broadcastImpact
-          },
-          implementation: {
-            logicNodes: [
-              { id: '1', label: copy.initLogicLabel, detail: copy.broadcastLogic }
-            ]
-          }
-        });
-      }
-
-      setIsBroadcasting(false);
-      toast(copy.toasts.broadcastSuccess, 'success');
-      router.push('/');
-    }, 1500);
+  const onSubmit = (e: React.FormEvent) => {
+    handleSubmit(nodeType, e);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-32 pb-32 px-6 md:px-12 font-sans">
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white pt-32 pb-32 px-6 md:px-12 font-sans">
       <div className="max-w-2xl mx-auto">
-        <div className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-white/40 mb-4">
+        <div className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-black/40 dark:text-white/40 mb-4">
           {copy.initSection}
         </div>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-12">
           {copy.initHeading}
         </h1>
         
-        <form className="space-y-8" onSubmit={handleSubmit}>
+        <form className="space-y-8" onSubmit={onSubmit}>
           <div>
-            <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-2">
+            <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-black/60 dark:text-white/60 mb-2">
               {copy.nodeTypeLabel}
             </label>
             <div className="grid grid-cols-2 gap-4">
               <button 
                 type="button" 
                 onClick={() => setNodeType('project')}
-                className={`border p-4 text-left transition-colors ${nodeType === 'project' ? 'border-white bg-white text-black' : 'border-white/20 bg-white/5 text-white hover:border-white'}`}
+                className={`border p-4 text-left transition-colors ${nodeType === 'project' ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black' : 'border-black/20 bg-black/5 text-black hover:border-black dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-white'}`}
               >
                 <div className="font-bold mb-1">{copy.projectTypeBtn}</div>
                 <div className="font-mono text-[11px] opacity-50 uppercase">{copy.projectSubtitle}</div>
@@ -124,7 +69,7 @@ export default function InitNodePage() {
               <button 
                 type="button" 
                 onClick={() => setNodeType('experience')}
-                className={`border p-4 text-left transition-colors ${nodeType === 'experience' ? 'border-white bg-white text-black' : 'border-white/20 bg-white/5 text-white hover:border-white'}`}
+                className={`border p-4 text-left transition-colors ${nodeType === 'experience' ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black' : 'border-black/20 bg-black/5 text-black hover:border-black dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-white'}`}
               >
                 <div className="font-bold mb-1">{copy.experienceTypeBtn}</div>
                 <div className="font-mono text-[11px] opacity-50 uppercase">{copy.experienceSubtitle}</div>
@@ -133,7 +78,7 @@ export default function InitNodePage() {
           </div>
 
           <div>
-            <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-2">
+            <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-black/60 dark:text-white/60 mb-2">
               {copy.contentLabel}
             </label>
             <textarea 
@@ -141,20 +86,20 @@ export default function InitNodePage() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
-              className="w-full bg-transparent border border-white/20 p-4 text-white focus:outline-none focus:border-white transition-colors resize-none font-mono italic text-lg placeholder:text-white/20"
+              className="w-full bg-transparent border border-black/20 dark:border-white/20 p-4 text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors resize-none font-mono italic text-lg placeholder:text-black/20 dark:placeholder:text-white/20"
               placeholder={nodeType === 'experience' ? copy.experiencePlaceholder : copy.projectPlaceholder}
             ></textarea>
           </div>
 
           <div>
-            <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-2">
+            <label className="font-mono block text-[11px] font-bold uppercase tracking-[0.3em] text-black/60 dark:text-white/60 mb-2">
               {copy.tagsLabel}
             </label>
             <input 
               type="text"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-              className="w-full bg-transparent border border-white/20 p-4 text-white focus:outline-none focus:border-white transition-colors placeholder:text-white/20"
+              value={tagsInput}
+              onChange={(e) => setTagsInput(e.target.value)}
+              className="w-full bg-transparent border border-black/20 dark:border-white/20 p-4 text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors placeholder:text-black/20 dark:placeholder:text-white/20"
               placeholder={copy.tagsPlaceholder}
             />
           </div>
@@ -162,11 +107,11 @@ export default function InitNodePage() {
           <button 
             type="submit" 
             disabled={isBroadcasting || !content.trim()}
-            className={`font-mono w-full text-xs uppercase tracking-[0.3em] font-bold py-6 transition-colors ${isBroadcasting ? 'bg-white/20 text-white cursor-not-allowed' : 'bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed'}`}
+            className={`font-mono w-full text-xs uppercase tracking-[0.3em] font-bold py-6 transition-colors shadow-elegant dark:shadow-elegant-dark ${isBroadcasting ? 'bg-black/20 text-black dark:bg-white/20 dark:text-white cursor-not-allowed' : 'bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed'}`}
           >
             {isBroadcasting ? (
               <span className="flex items-center justify-center gap-2">
-                <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
+                <span className="w-2 h-2 bg-black dark:bg-white rounded-full animate-ping"></span>
                 {copy.broadcasting}
               </span>
             ) : copy.initBroadcast}

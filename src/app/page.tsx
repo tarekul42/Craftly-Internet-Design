@@ -73,7 +73,7 @@ export default function Home() {
                     Explore <span className="font-brand normal-case tracking-tight">Craftly Internet</span>
                   </>
                 ) : (
-                  copy.consoleTitle
+                  'consoleTitle' in copy ? copy.consoleTitle : ''
                 )}
               </h2>
               <div className="flex gap-4 items-center">
@@ -134,12 +134,12 @@ export default function Home() {
                         )}
                       </div>
                       <div className="font-mono text-[11px] opacity-50 mt-1">
-                        {post.type.charAt(0).toUpperCase() + post.type.slice(1)} {'//'} {post.id.padStart(3, '0')}
+                        {post.type === 'project' ? copy.postTypeProject : copy.postTypeExperience} {'//'} {post.id.padStart(3, '0')}
                       </div>
                     </div>
                   </div>
                   <div suppressHydrationWarning className="font-mono text-[11px] opacity-40 whitespace-nowrap ml-2">
-                    {post.timestamp ? new Date(post.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'LIVE'}
+                    {post.timestamp ? new Date(post.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : copy.timestampLive}
                   </div>
                 </div>
 
@@ -157,7 +157,7 @@ export default function Home() {
                     <span className="font-mono text-[11px]">{post.metrics.audits}</span>
                   </div>
                   <div className="flex items-center gap-1.5 opacity-60">
-                    <span className="text-[11px] font-mono">⑂</span>
+                    <span className="text-[11px] font-mono">{copy.forkIcon}</span>
                     <span className="font-mono text-[11px]">{post.metrics.forks}</span>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function Home() {
                   disabled={isAlreadyForked}
                   className={`font-mono text-[11px] font-bold uppercase tracking-widest transition-all flex items-center gap-1 md:gap-2 ${isAlreadyForked ? 'opacity-100 bg-black text-white dark:bg-white dark:text-black px-2 py-1' : 'opacity-40 hover:opacity-100'}`}
                 >
-                  <span className="hidden md:inline-block">{isAlreadyForked ? '✓' : '⑂'}</span> 
+                  <span className="hidden md:inline-block">{isAlreadyForked ? '✓' : copy.forkIcon}</span> 
                   {isAlreadyForked ? copy.forked : copy.fork}
                 </button>
               );

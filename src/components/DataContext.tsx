@@ -24,13 +24,17 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
   const [prevRole, setPrevRole] = useState(role);
 
-  if (role !== prevRole) {
-    setPrevRole(role);
-    setIsInitialized(false);
-  }
+
 
   useEffect(() => {
     let mounted = true;
+
+    if (role !== prevRole) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPrevRole(role);
+       
+      setIsInitialized(false);
+    }
     
     // Simulate loading role-specific data
     const loadData = () => {
@@ -47,7 +51,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       mounted = false;
       clearTimeout(timer);
     };
-  }, [role]);
+  }, [role, prevRole]);
 
   const forkPost = (post: FeedPost) => {
     const isAlreadyForked = workbenchData.some(item => item.originalPost.id === post.id);

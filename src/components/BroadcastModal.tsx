@@ -1,64 +1,31 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useAuth } from '@/components/Auth';
-import { useData } from '@/components/DataContext';
-import { useToast } from '@/components/Toast';
-import { ExperiencePost } from '@/types';
-import { getRoleCopy } from '@/lib/roleCopy';
+
+import React from 'react';
+import { useBroadcastForm } from '@/hooks/useBroadcastForm';
 
 export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [content, setContent] = useState('');
-  const [tagsInput, setTagsInput] = useState('');
-  const { isRegistered, role } = useAuth();
-  const { broadcastPost } = useData();
-  const { toast } = useToast();
-  const copy = getRoleCopy(role);
+  const { content, setContent, tagsInput, setTagsInput, handleSubmit, copy } = useBroadcastForm(onClose);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!content.trim()) return;
-
-    if (!isRegistered) {
-      toast(copy.toasts.broadcastError, 'warning');
-      return;
-    }
-
-    const tags = tagsInput.split(',').map(t => t.trim()).filter(Boolean);
-
-    const newPost: ExperiencePost = {
-      id: `e-${Date.now()}`,
-      type: 'experience',
-      creator: copy.broadcastCreator, // Could tie to actual user profile if we had one
-      signature: 'Local',
-      timestamp: new Date().toISOString(),
-      content: content.trim(),
-      tags: tags.length > 0 ? tags : ['log'],
-      metrics: { acknowledgements: 0, audits: 0, forks: 0 }
-    };
-
-    broadcastPost(newPost);
-    toast(copy.toasts.broadcastSuccess, 'success');
-    setContent('');
-    setTagsInput('');
-    onClose();
+  const onSubmit = (e: React.FormEvent) => {
+    handleSubmit('experience', e);
   };
 
   return (
     <div className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-black w-full max-w-2xl border border-black/10 dark:border-white/10 shadow-2xl">
+      <div className="bg-white dark:bg-black w-full max-w-2xl border border-black/10 dark:border-white/10 shadow-elegant dark:shadow-elegant-dark">
         <div className="border-b border-black/10 dark:border-white/10 p-4 flex justify-between items-center bg-brandGray-50 dark:bg-brandGray-950">
           <div className="font-mono text-[11px] uppercase font-bold tracking-[0.2em] text-black/40 dark:text-white/40">
             {copy.initHeading} {/* Active */}
           </div>
           <button onClick={onClose} className="hover:opacity-50 font-mono text-[11px] uppercase tracking-widest opacity-40">
-            Close [X]
+            {copy.closeModal}
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="p-8">
+        <form onSubmit={onSubmit} className="p-8">
           <div className="mb-6">
             <label className="font-mono text-[11px] uppercase opacity-50 block mb-2 tracking-[0.1em]">{copy.experienceLabel}</label>
             <textarea
@@ -87,7 +54,7 @@ export function BroadcastModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
               onClick={onClose}
               className="font-mono px-6 py-3 text-xs uppercase font-bold tracking-widest hover:opacity-50 transition-opacity"
             >
-              Cancel
+              {copy.cancel}
             </button>
             <button 
               type="submit"
