@@ -13,20 +13,20 @@ export default function IdentityPage() {
   if (!isRegistered) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-black font-sans p-6">
-        <div className="max-w-md w-full border-double border-4 border-white bg-black p-8 md:p-12">
-          <div className="font-mono text-white text-xs font-bold uppercase tracking-widest mb-6 flex items-center gap-3">
+        <div className="max-w-md w-full border-double border-4 border-white bg-black p-8 md:p-12 card-radius">
+          <div className="role-label font-bold text-white mb-6 flex items-center gap-3">
             <span className="w-2 h-2 bg-white animate-pulse"></span>
             {copy.workbenchUnauthorizedHeading}
           </div>
           <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
             {copy.accessDenied}
           </h1>
-          <p className="text-white/60 mb-8 font-mono italic text-lg border-l-2 border-white/30 pl-4">
+          <p className="text-white/60 mb-8 italic text-lg border-l-2 border-white/30 pl-4">
             &quot;{copy.workbenchUnauthorized}&quot;
           </p>
           <button 
             onClick={login}
-            className="font-mono w-full bg-white text-black font-bold uppercase tracking-[0.3em] text-[11px] py-4 hover:invert transition-colors"
+            className="role-label w-full bg-white text-black font-bold py-4 hover:invert transition-colors btn-radius"
           >
             {copy.identityAction}
           </button>
@@ -41,62 +41,64 @@ export default function IdentityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white pt-20 font-sans">
+    <div className="min-h-[calc(100vh-5rem)] bg-white dark:bg-black text-black dark:text-white font-sans transition-all duration-500" style={{ paddingBlock: 'var(--spacing-section)' }}>
       <div className="max-w-4xl mx-auto p-6 md:p-12">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-black/10 pb-8 md:pb-12 mb-8 md:mb-12">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-4xl md:text-5xl flex-shrink-0">
+            <div className={`w-20 h-20 md:w-24 md:h-24 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-4xl md:text-5xl flex-shrink-0 ${
+              role === 'guest' ? 'rounded-full' : role === 'builder' ? 'rounded-xl' : ''
+            }`}>
               {copy.broadcastCreator.charAt(0).toUpperCase()}
             </div>
             <div>
-              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
+              <h2 className="role-label font-bold text-black/40 dark:text-white/40 mb-2">
                 {copy.identitySubtitle}
               </h2>
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-none">
+              <h1 className={`text-4xl md:text-5xl font-bold leading-none ${role === 'engineer' ? 'tracking-tighter uppercase' : 'tracking-tight'}`}>
                 {copy.broadcastCreator}
               </h1>
             </div>
           </div>
-          <div className="font-mono text-[11px] uppercase tracking-widest opacity-30 mt-6 md:mt-0">
+          <div className="role-label opacity-30 mt-6 md:mt-0">
             {copy.statusLabel}
           </div>
         </div>
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950">
-            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-4">
+          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950 card-radius" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="role-label font-bold text-black/40 dark:text-white/40 mb-4">
               {copy.identityMetric1Label}
             </div>
-            <div className="text-4xl md:text-5xl font-mono font-bold flex items-center gap-3">
+            <div className="text-4xl md:text-5xl font-bold flex items-center gap-3" style={{ fontFamily: 'var(--font-ui)' }}>
               <span className="opacity-30">{copy.identityMetric1Icon}</span> {copy.identityMetric1Value}
             </div>
           </div>
           
-          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950">
-            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-4">
+          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950 card-radius" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="role-label font-bold text-black/40 dark:text-white/40 mb-4">
               {copy.identityMetric2Label}
             </div>
-            <div className="text-4xl md:text-5xl font-mono font-bold">
+            <div className="text-4xl md:text-5xl font-bold" style={{ fontFamily: 'var(--font-ui)' }}>
               {copy.identityMetric2Value}
             </div>
           </div>
 
-          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950">
-            <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-4">
+          <div className="border border-black/10 dark:border-white/10 p-6 md:p-8 bg-brandGray-50 dark:bg-brandGray-950 card-radius" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="role-label font-bold text-black/40 dark:text-white/40 mb-4">
               {copy.identityMetric3Label}
             </div>
-            <div className="text-4xl md:text-5xl font-mono font-bold flex items-center gap-3">
+            <div className="text-4xl md:text-5xl font-bold flex items-center gap-3" style={{ fontFamily: 'var(--font-ui)' }}>
               <span className="opacity-30">{copy.identityMetric3Icon}</span> {copy.identityMetric3Value}
             </div>
           </div>
         </div>
 
         {/* Role Selection */}
-        <div className="mb-12 border border-black/10 dark:border-white/10 p-8 bg-brandGray-50 dark:bg-brandGray-950">
-          <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-6">
+        <div className="mb-12 border border-black/10 dark:border-white/10 p-8 bg-brandGray-50 dark:bg-brandGray-950 card-radius" style={{ boxShadow: 'var(--shadow-card)' }}>
+          <h2 className="role-label font-bold text-black/40 dark:text-white/40 mb-6">
             {copy.switchMode}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,7 +106,7 @@ export default function IdentityPage() {
               <button
                 key={r}
                 onClick={() => setRole(r)}
-                className={`font-mono text-[11px] uppercase tracking-[0.2em] font-bold py-4 border transition-all ${role === r ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white' : 'bg-transparent text-black dark:text-white border-black/10 dark:border-white/10 hover:border-black dark:hover:border-white'}`}
+                className={`role-label font-bold py-4 border transition-all btn-radius ${role === r ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white' : 'bg-transparent text-black dark:text-white border-black/10 dark:border-white/10 hover:border-black dark:hover:border-white'}`}
               >
                 {r.toUpperCase()}
               </button>
@@ -115,14 +117,16 @@ export default function IdentityPage() {
         <div className="mb-24">
           <Link 
             href="/init"
-            className="group block border border-black/10 dark:border-white/10 p-8 md:p-12 hover:bg-black dark:hover:bg-white transition-colors shadow-elegant dark:shadow-elegant-dark"
+            className={`group block border border-black/10 dark:border-white/10 p-8 md:p-12 hover:bg-black dark:hover:bg-white transition-all shadow-elegant dark:shadow-elegant-dark card-radius ${
+              role === 'guest' ? 'hover:scale-[1.01]' : ''
+            }`}
           >
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold uppercase group-hover:text-white dark:group-hover:text-black transition-colors">
+                <h3 className={`text-2xl md:text-3xl font-bold group-hover:text-white dark:group-hover:text-black transition-colors ${role === 'engineer' ? 'uppercase' : ''}`}>
                   + {copy.identityAction}
                 </h3>
-                <p className="font-mono text-xs uppercase tracking-widest opacity-50 group-hover:text-white/70 dark:group-hover:text-black/70 mt-2">
+                <p className="role-label opacity-50 group-hover:text-white/70 dark:group-hover:text-black/70 mt-2">
                   {copy.identityActionDesc}
                 </p>
               </div>
@@ -135,7 +139,7 @@ export default function IdentityPage() {
         <div className="border-t border-black/10 pt-12 flex justify-center">
           <button 
             onClick={handleLogout}
-            className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-black/10 dark:border-white/10 px-8 py-4 transition-all"
+            className="role-label font-bold text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-black/10 dark:border-white/10 px-8 py-4 transition-all btn-radius"
           >
             {copy.toasts.logout}
           </button>

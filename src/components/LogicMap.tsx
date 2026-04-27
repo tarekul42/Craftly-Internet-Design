@@ -2,9 +2,13 @@
 
 import { LogicNode } from '@/types';
 
+import { useAuth } from '@/components/Auth';
+
 export default function LogicMap({ logicNodes }: { logicNodes: LogicNode[] }) {
+  const { role } = useAuth();
+  
   return (
-    <div className="relative font-mono">
+    <div className={`relative ${role === 'engineer' ? 'font-mono' : 'font-sans'}`}>
       {/* Background Grid */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -21,14 +25,19 @@ export default function LogicMap({ logicNodes }: { logicNodes: LogicNode[] }) {
           <div key={node.id} className="relative flex flex-col items-center">
             {/* The Node Block */}
             <div 
-              className="logic-node-animate bg-white dark:bg-black border border-black/20 dark:border-white/20 p-5 w-64 shadow-elegant dark:shadow-elegant-dark z-20 transition-all duration-500 hover:border-black dark:hover:border-white"
-              style={{ '--node-index': i } as React.CSSProperties}
+              className={`logic-node-animate bg-white dark:bg-black border border-black/20 dark:border-white/20 p-5 w-64 z-20 transition-all duration-500 hover:border-black dark:hover:border-white card-radius ${
+                role === 'guest' ? 'p-7' : ''
+              }`}
+              style={{ 
+                '--node-index': i,
+                boxShadow: 'var(--shadow-card)'
+              } as React.CSSProperties}
             >
               <div className="flex justify-between items-center mb-3 border-b border-black/5 dark:border-white/5 pb-2">
-                <span className="text-[10px] font-bold opacity-30 tracking-tighter">{node.id}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white opacity-20"></span>
+                <span className="role-label text-[10px] font-bold opacity-30 tracking-tighter">{node.id}</span>
+                <span className={`w-1.5 h-1.5 rounded-full bg-black dark:bg-white opacity-20 ${role === 'guest' ? 'opacity-40 animate-pulse' : ''}`}></span>
               </div>
-              <h4 className="font-bold uppercase text-[13px] mb-1 leading-tight">{node.label}</h4>
+              <h4 className={`font-bold text-[13px] mb-1 leading-tight ${role === 'engineer' ? 'uppercase' : ''}`}>{node.label}</h4>
               <p className="text-[11px] opacity-60 leading-relaxed font-medium">
                 {node.detail}
               </p>

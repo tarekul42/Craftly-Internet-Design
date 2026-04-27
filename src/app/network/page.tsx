@@ -13,16 +13,21 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
   const copy = getRoleCopy(role);
   
   return (
-    <div className="border border-black/10 dark:border-white/10 bg-white dark:bg-black flex flex-col group hover:shadow-elegant dark:hover:shadow-elegant-dark transition-all duration-500">
+    <div 
+      className="bg-white dark:bg-black flex flex-col group transition-all duration-500 card-radius border border-black/10 dark:border-white/10 overflow-hidden"
+      style={{ boxShadow: 'var(--shadow-card)' }}
+    >
       <div className="p-6 border-b border-black/10 dark:border-white/10 flex justify-between items-start bg-brandGray-50 dark:bg-brandGray-950">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-lg">
+            <div className={`w-10 h-10 bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-lg ${
+              role === 'guest' ? 'rounded-full' : role === 'builder' ? 'rounded-lg' : ''
+            }`}>
               {orchestrator.name.charAt(0)}
             </div>
             <div>
               <h3 className="font-bold text-lg leading-none text-black dark:text-white">{orchestrator.name}</h3>
-              <div className="font-mono text-[11px] tracking-widest opacity-50 mt-1 text-black dark:text-white">
+              <div className="role-label opacity-50 mt-1 text-black dark:text-white">
                 {copy.networkIdLabel.replace('{id}', orchestrator.id.toUpperCase())}
               </div>
             </div>
@@ -33,7 +38,7 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
       
       <div className="p-6 flex-1 flex flex-col text-black dark:text-white">
         <div className="mb-6">
-          <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
+          <div className="role-label font-bold text-black/40 dark:text-white/40 mb-2">
             {copy.networkSpecLabel}
           </div>
           <p className="text-sm font-medium leading-relaxed">
@@ -43,12 +48,12 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
 
         <div className="mt-auto grid grid-cols-2 gap-4 border-t border-black/10 dark:border-white/10 pt-6">
           <div>
-            <div className="font-mono text-[11px] uppercase opacity-50 mb-1">{copy.networkMetric1}</div>
-            <div className="font-bold text-xl font-mono">{orchestrator.metrics.nodesBroadcasted}</div>
+            <div className="role-label opacity-50 mb-1">{copy.networkMetric1}</div>
+            <div className="font-bold text-xl font-mono" style={{ fontFamily: 'var(--font-ui)' }}>{orchestrator.metrics.nodesBroadcasted}</div>
           </div>
           <div>
-            <div className="font-mono text-[11px] uppercase opacity-50 mb-1">{copy.networkMetric2}</div>
-            <div className="font-bold text-xl font-mono flex items-center gap-1">
+            <div className="role-label opacity-50 mb-1">{copy.networkMetric2}</div>
+            <div className="font-bold text-xl font-mono flex items-center gap-1" style={{ fontFamily: 'var(--font-ui)' }}>
               <span className="text-sm opacity-50">{copy.forkIcon}</span> {orchestrator.metrics.forkRate}
             </div>
           </div>
@@ -63,7 +68,11 @@ const OrchestratorCard = ({ orchestrator }: { orchestrator: Orchestrator }) => {
           }
           toast(copy.toasts.networkPing.replace('{name}', orchestrator.name), 'success');
         }}
-        className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold border-t border-black/10 dark:border-white/10 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-black dark:text-white"
+        className={`w-full font-bold border-t border-black/10 dark:border-white/10 py-4 transition-colors text-black dark:text-white btn-radius ${
+          role === 'engineer' 
+            ? 'font-mono text-[11px] uppercase tracking-[0.3em] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black' 
+            : 'font-sans text-sm hover:bg-black/5 dark:hover:bg-white/5'
+        }`}
       >
         {copy.networkAction}
       </button>
@@ -77,11 +86,11 @@ export default function NetworkPage() {
   const orchestrators = orchestratorsByRole[role];
 
   return (
-    <div className="min-h-screen bg-brandGray-100 dark:bg-brandGray-975 pt-32 pb-32 px-6 md:px-12 font-sans">
+    <div className="min-h-[calc(100vh-5rem)] bg-brandGray-100 dark:bg-brandGray-975 px-6 md:px-12 transition-all duration-500" style={{ paddingBlock: 'var(--spacing-section)' }}>
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 md:gap-0">
           <SectionHeader subtitle={copy.networkSection} title={copy.networkTitle} />
-          <div className="font-mono text-xs uppercase tracking-widest opacity-60 flex items-center gap-3 text-black dark:text-white">
+          <div className="role-label opacity-60 flex items-center gap-3 text-black dark:text-white">
             <span className="w-3 h-3 bg-black dark:bg-white rounded-full animate-pulse"></span>
             {orchestrators.filter(o => o.status === 'active').length} {copy.networkCount}
           </div>

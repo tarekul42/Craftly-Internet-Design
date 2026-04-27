@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/ThemeContext";
 import Navbar from "@/components/Navbar";
 import { ToastProvider } from "@/components/Toast";
 import { CommandPalette } from "@/components/CommandPalette";
+import { RoleWrapper } from "@/components/RoleWrapper";
 import { usePathname } from "next/navigation";
 
 const inter = Inter({
@@ -40,15 +41,17 @@ export default function RootLayout({
       >
         <AuthProvider>
           <DataProvider>
-            <ThemeProvider>
-              <ToastProvider>
-                <Navbar />
-                <main key={pathname} className="page-transition-wrapper">
-                  {children}
-                </main>
-                <CommandPalette />
-              </ToastProvider>
-            </ThemeProvider>
+            <RoleWrapper>
+              <ThemeProvider>
+                <ToastProvider>
+                  <Navbar />
+                  <main key={pathname} className="page-transition-wrapper pt-20">
+                    {children}
+                  </main>
+                  <CommandPalette />
+                </ToastProvider>
+              </ThemeProvider>
+            </RoleWrapper>
           </DataProvider>
         </AuthProvider>
       </body>

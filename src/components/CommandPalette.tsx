@@ -65,20 +65,23 @@ export function CommandPalette() {
   return (
     <div className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-[2px] flex items-start justify-center pt-[20vh]" onClick={() => setIsOpen(false)}>
       <div 
-        className="w-full max-w-xl bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-elegant dark:shadow-elegant-dark flex flex-col mx-4"
+        className="w-full max-w-xl bg-white dark:bg-black border border-black/10 dark:border-white/10 flex flex-col mx-4 card-radius overflow-hidden"
+        style={{ boxShadow: 'var(--shadow-card)' }}
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center border-b border-black/10 dark:border-white/10 px-6 py-5">
-          <span className="font-mono text-black/30 dark:text-white/30 mr-3 text-lg">{'>'}</span>
+          <span className="role-label text-black/30 dark:text-white/30 mr-3 text-lg">{'>'}</span>
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={copy.commandSearchPlaceholder}
-            className="font-mono flex-1 bg-transparent border-none outline-none text-black dark:text-white uppercase tracking-[0.1em] text-sm placeholder-black/20 dark:placeholder-white/20"
+            className={`flex-1 bg-transparent border-none outline-none text-black dark:text-white tracking-[0.1em] text-sm placeholder-black/20 dark:placeholder-white/20 ${
+              role === 'engineer' ? 'font-mono uppercase' : 'font-sans'
+            }`}
           />
-          <div className="font-mono text-[10px] text-black/40 dark:text-white/40 bg-black/5 dark:bg-white/10 px-2 py-1 rounded-sm uppercase tracking-tighter">
+          <div className="role-label text-[10px] text-black/40 dark:text-white/40 bg-black/5 dark:bg-white/10 px-2 py-1 rounded-sm uppercase tracking-tighter pill-radius">
             {copy.escToClose}
           </div>
         </div>
@@ -88,14 +91,18 @@ export function CommandPalette() {
               <button
                 key={cmd.id}
                 onClick={() => handleSelect(cmd.action)}
-                className="font-mono w-full text-left px-6 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-xs uppercase tracking-widest flex items-center justify-between group"
+                className={`w-full text-left px-6 py-4 transition-colors flex items-center justify-between group ${
+                  role === 'engineer' 
+                    ? 'font-mono text-xs uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black' 
+                    : 'font-sans text-sm hover:bg-black/5 dark:hover:bg-white/5'
+                }`}
               >
                 <span>{cmd.label}</span>
                 <span className="opacity-0 group-hover:opacity-100 transition-opacity">↵</span>
               </button>
             ))
           ) : (
-            <div className="font-mono text-center py-12 text-black/40 dark:text-white/40 uppercase tracking-widest text-xs">
+            <div className="role-label text-center py-12 text-black/40 dark:text-white/40 uppercase tracking-widest text-xs">
               {copy.commandNoResults}
             </div>
           )}

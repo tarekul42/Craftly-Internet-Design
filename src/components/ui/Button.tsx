@@ -5,8 +5,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
+import { useAuth } from '@/components/Auth';
+
 export function Button({ variant = 'primary', children, className = '', ...props }: ButtonProps) {
-  const baseStyles = "font-mono text-[11px] uppercase tracking-[0.3em] font-bold transition-all whitespace-nowrap flex items-center justify-center";
+  const { role } = useAuth();
+  const baseStyles = "font-bold transition-all whitespace-nowrap flex items-center justify-center btn-radius";
   
   const variants = {
     primary: "border border-black dark:border-white px-6 py-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black bg-white text-black dark:bg-black dark:text-white",
@@ -16,9 +19,13 @@ export function Button({ variant = 'primary', children, className = '', ...props
     outline: "border border-black dark:border-white px-8 py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
   };
 
+  const roleStyles = role === 'engineer' 
+    ? "font-mono text-[11px] uppercase tracking-[0.3em]" 
+    : "font-sans text-sm tracking-normal";
+
   return (
     <button 
-      className={`${baseStyles} ${variants[variant]} ${props.disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
+      className={`${baseStyles} ${roleStyles} ${variants[variant]} ${props.disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
       {...props}
     >
       {children}

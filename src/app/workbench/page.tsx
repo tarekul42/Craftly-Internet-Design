@@ -18,21 +18,26 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
   const { toast } = useToast();
   
   return (
-    <div className="border border-black/10 dark:border-white/10 bg-white dark:bg-black flex flex-col group hover:shadow-elegant transition-all duration-500 overflow-hidden">
-      <div className="p-4 border-b border-black/10 dark:border-white/10 flex justify-between items-center bg-black dark:bg-white text-white dark:text-black">
+    <div 
+      className="bg-white dark:bg-black flex flex-col group transition-all duration-500 card-radius border border-black/10 dark:border-white/10 overflow-hidden"
+      style={{ boxShadow: 'var(--shadow-card)' }}
+    >
+      <div className={`p-4 border-b border-black/10 dark:border-white/10 flex justify-between items-center ${
+        role === 'engineer' ? 'bg-black dark:bg-white text-white dark:text-black' : 'bg-brandGray-50 dark:bg-brandGray-950 text-black dark:text-white'
+      }`}>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[11px] uppercase tracking-widest">
+          <span className="role-label font-bold">
             {item.status === 'review' ? copy.statusReview : item.status === 'integrating' ? copy.statusIntegrating : copy.statusArchived}
           </span>
-          {item.status === 'integrating' && <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>}
+          {item.status === 'integrating' && <span className={`w-2 h-2 rounded-full animate-pulse ${role === 'engineer' ? 'bg-white dark:bg-black' : 'bg-black dark:bg-white'}`}></span>}
         </div>
-        <div suppressHydrationWarning className="font-mono text-[11px] opacity-70">
+        <div suppressHydrationWarning className="role-label opacity-70">
           {copy.forkedDateLabel} {new Date(item.forkedAt).toLocaleDateString()}
         </div>
       </div>
 
       <div className="p-6 border-b border-black/10 dark:border-white/10 flex-1">
-        <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mb-2">
+        <div className="role-label font-bold text-black/40 dark:text-white/40 mb-2">
           {copy.originLabel} {item.originalPost.creator}
         </div>
         <h3 className="font-bold text-xl leading-tight mb-4 text-black dark:text-white">
@@ -41,7 +46,7 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
         
         {/* Miniature Logic Map Preview */}
         {isProject && projectPost && (
-          <div className="border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-brandGray-900 p-4 h-48 overflow-hidden relative pointer-events-none mb-6">
+          <div className="border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-brandGray-900 p-4 h-48 overflow-hidden relative pointer-events-none mb-6 card-radius">
             <div className="absolute inset-0 scale-[0.6] origin-top-left p-4">
               <LogicMap logicNodes={projectPost.implementation.logicNodes} />
             </div>
@@ -49,15 +54,19 @@ const WorkbenchCard = ({ item }: { item: WorkbenchItem }) => {
           </div>
         )}
 
-        <div className="bg-black dark:bg-white text-white dark:text-black p-4 border border-black/10 shadow-elegant dark:shadow-elegant-dark">
-          <div className="font-mono text-[11px] uppercase tracking-widest opacity-60 mb-1">{copy.privateNoteLabel}</div>
-          <p className="text-sm font-mono italic">{item.notes}</p>
+        <div className={`p-4 border border-black/10 shadow-elegant dark:shadow-elegant-dark card-radius ${
+          role === 'engineer' ? 'bg-black dark:bg-white text-white dark:text-black' : 'bg-gray-100 dark:bg-brandGray-900'
+        }`}>
+          <div className={`role-label opacity-60 mb-1 ${role === 'engineer' ? 'text-white/60 dark:text-black/60' : ''}`}>{copy.privateNoteLabel}</div>
+          <p className={`text-sm font-mono italic ${role !== 'engineer' ? 'font-sans' : ''}`}>{item.notes}</p>
         </div>
       </div>
 
       <button 
         onClick={() => toast(copy.toasts.workbenchIntegrate, 'info')}
-        className="font-mono w-full text-[11px] uppercase tracking-[0.3em] font-bold py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors bg-brandGray-50 dark:bg-brandGray-950"
+        className={`w-full font-bold py-4 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors bg-brandGray-50 dark:bg-brandGray-950 btn-radius ${
+          role === 'engineer' ? 'font-mono text-[11px] uppercase tracking-[0.3em]' : 'font-sans text-sm'
+        }`}
       >
         {copy.inspectAction}
       </button>
@@ -73,14 +82,14 @@ export default function WorkbenchPage() {
   if (!isRegistered) {
     return (
       <div className="min-h-screen bg-black pt-32 pb-32 px-6 md:px-12 flex items-center justify-center font-sans">
-        <div className="border border-white/20 bg-white/5 p-12 max-w-2xl w-full text-center flex flex-col items-center shadow-elegant dark:shadow-elegant-dark backdrop-blur-sm">
-          <h2 className="font-mono text-white font-bold tracking-widest uppercase mb-4 text-lg">
+        <div className="border border-white/20 bg-white/5 p-12 max-w-2xl w-full text-center flex flex-col items-center shadow-elegant dark:shadow-elegant-dark backdrop-blur-sm card-radius">
+          <h2 className="role-label font-bold text-white mb-4 text-lg">
             {copy.workbenchUnauthorizedHeading}
           </h2>
-          <p className="text-white/60 font-mono italic mb-12 text-base leading-relaxed">
+          <p className="text-white/60 italic mb-12 text-base leading-relaxed">
             {copy.workbenchUnauthorized}
           </p>
-          <Button variant="outline" onClick={login} className="text-white border-white hover:bg-white hover:text-black">
+          <Button variant="outline" onClick={login} className="text-white border-white hover:bg-white hover:text-black btn-radius">
             {copy.identityAction}
           </Button>
         </div>
@@ -89,11 +98,11 @@ export default function WorkbenchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-brandGray-100 dark:bg-brandGray-975 pt-32 pb-32 px-6 md:px-12 font-sans">
+    <div className="min-h-[calc(100vh-5rem)] bg-brandGray-100 dark:bg-brandGray-975 px-6 md:px-12 transition-all duration-500" style={{ paddingBlock: 'var(--spacing-section)' }}>
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 md:gap-0">
           <SectionHeader subtitle={copy.workbench} title={copy.blueprintTitle} />
-          <div className="font-mono text-xs uppercase tracking-widest opacity-60 flex items-center gap-2 text-black dark:text-white">
+          <div className="role-label opacity-60 flex items-center gap-2 text-black dark:text-white">
             <span className="text-lg">{copy.forkIcon}</span>
             {copy.forkedCount.replace('{n}', workbenchData.length.toString())}
           </div>
@@ -106,17 +115,19 @@ export default function WorkbenchPage() {
             ))}
           </div>
         ) : (
-          <div className="border border-dashed border-black/10 dark:border-white/10 p-12 md:p-24 bg-transparent flex flex-col items-center justify-center text-center min-h-[50vh] relative group">
+          <div className="border border-dashed border-black/10 dark:border-white/10 p-12 md:p-24 bg-transparent flex flex-col items-center justify-center text-center min-h-[50vh] relative group card-radius">
             <div className="absolute inset-0 bg-black/[0.02] dark:bg-white/[0.02] group-hover:bg-transparent transition-colors"></div>
             <div className="relative z-10 flex flex-col items-center">
-              <div className="font-mono text-6xl opacity-10 mb-8">{copy.forkIcon}</div>
-              <h2 className="font-mono text-sm md:text-base uppercase tracking-[0.3em] font-bold text-black dark:text-white mb-6">
+              <div className="text-6xl opacity-10 mb-8">{copy.forkIcon}</div>
+              <h2 className="role-label font-bold text-black dark:text-white mb-6">
                 {copy.emptyWorkbench}
               </h2>
-              <p className="font-mono italic text-black/60 dark:text-white/60 max-w-lg mb-10 text-lg leading-relaxed">
+              <p className="italic text-black/60 dark:text-white/60 max-w-lg mb-10 text-lg leading-relaxed">
                 {copy.emptyWorkbenchDesc}
               </p>
-              <Link href="/" className="font-mono border border-black/20 dark:border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all bg-white dark:bg-black text-black dark:text-white shadow-elegant dark:shadow-elegant-dark">
+              <Link href="/" className={`border border-black/20 dark:border-white/20 px-8 py-4 font-bold transition-all bg-white dark:bg-black text-black dark:text-white shadow-elegant dark:shadow-elegant-dark btn-radius ${
+                role === 'engineer' ? 'font-mono text-xs uppercase tracking-[0.2em]' : 'font-sans text-sm'
+              }`}>
                 {copy.returnLink}
               </Link>
             </div>
